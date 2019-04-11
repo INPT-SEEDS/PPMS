@@ -21,7 +21,7 @@ public class PortfolioInterface extends Pane
 	private Paint lightBlue=Paint.valueOf("5096be");
 	private Paint lightGreen=Paint.valueOf("50be96");
 
-	private Button bar,viewProject,modify, evaluate;
+	private Button bar,modify, evaluate;
 	private Button add;
 
 	private TableView tvPortfolio;
@@ -31,23 +31,20 @@ public class PortfolioInterface extends Pane
 	{
 		this.setLayoutX(x*scalex);
 		this.setLayoutY(y*scaley);
-				
+
 		Image showIcon= new Image("file:res/icon/portfolio/ViewProject.png");
 		Image modifyIcon= new Image("file:res/icon/portfolio/Modify.png");
 		Image evaluateIcon=new Image("file:res/icon/portfolio/Evaluate.png");
 
 		//-Portolio-Table---------------------------------------------------------------------------------------------------------------------------------------
-		bar=JavaFX.NewButton("",black,2, 1080, 95,500,10);
-		viewProject=JavaFX.NewButton("Voir les projets", showIcon, ContentDisplay.LEFT, lightOrange, 16,1110 ,95 , 200, 32);
-		modify=JavaFX.NewButton("Modifier", modifyIcon, ContentDisplay.LEFT, lightBlue, 16,1320 ,95 , 130, 32);
-		evaluate =JavaFX.NewButton("Prioriser et Optimiser", evaluateIcon, ContentDisplay.LEFT, lightGreen, 16,1460 ,95 , 225, 32);
-		
+		bar=JavaFX.NewButton("",black,2, 1080, 85,350,10);
+		modify=JavaFX.NewButton("Modifier", modifyIcon, ContentDisplay.LEFT, lightBlue, 16,1110 ,74 , 130, 32);
+		evaluate =JavaFX.NewButton("Prioriser et Optimiser", evaluateIcon, ContentDisplay.LEFT, lightGreen, 16,1250 ,74 , 225, 32);
+
 		getChildren().add(bar);
-		getChildren().add(viewProject);
 		getChildren().add(modify);
 		getChildren().add(evaluate);
 
-		viewProject.setVisible(false);
 		modify.setVisible(false);
 		evaluate.setVisible(false);
 		bar.setVisible(false);
@@ -62,7 +59,7 @@ public class PortfolioInterface extends Pane
 			{
 				if (!row.isEmpty())
 				{
-					setActionBar(true, (int) (95+row.getIndex()*25/scaley));
+					setActionBar(true);
 					additionalOptions.getChildren().clear();
 				}
 			});
@@ -74,7 +71,7 @@ public class PortfolioInterface extends Pane
 		evaluate.addEventFilter(MouseEvent.MOUSE_PRESSED, mouseEvent ->
 		{
 			setActive(false);
-			setActionBar(false,0);
+			setActionBar(false);
 			Object row=tvPortfolio.getSelectionModel().getSelectedItems().get(0);
 			int IdPortfolio = Integer.valueOf(row.toString().split(",")[0].substring(1));
 			PortfolioTreat portfolioTreat=new PortfolioTreat(this,IdPortfolio);
@@ -86,7 +83,7 @@ public class PortfolioInterface extends Pane
 		modify.addEventFilter(MouseEvent.MOUSE_PRESSED, mouseEvent ->
 		{
 			setActive(false);
-			setActionBar(false,0);
+			setActionBar(false);
 			int portfolioId=Integer.valueOf(Utility.getSelectedRowColumn(tvPortfolio,0));
 			PortfolioModify portfolioModify=new PortfolioModify(this, portfolioId);
 			additionalOptions.getChildren().add(portfolioModify);
@@ -111,7 +108,7 @@ public class PortfolioInterface extends Pane
 		add.addEventFilter(MouseEvent.MOUSE_PRESSED, mouseEvent ->
 		{
 			setActive(false);
-			setActionBar(false,0);
+			setActionBar(false);
 			addPane.getChildren().addAll(addBar,idField,refField,libField,confirm,cancel);
 			tvPortfolio.getSelectionModel().clearSelection();
 		});
@@ -135,14 +132,8 @@ public class PortfolioInterface extends Pane
 		getChildren().add(addPane);
 	}
 
-	private void setActionBar(boolean visbility,int position)
+	private void setActionBar(boolean visbility)
 	{
-		viewProject.setLayoutY(position*scaley);
-		evaluate.setLayoutY(position*scaley);
-		modify.setLayoutY(position*scaley);
-		bar.setLayoutY((position+11)*scaley);
-
-		viewProject.setVisible(visbility);
 		evaluate.setVisible(visbility);
 		modify.setVisible(visbility);
 		bar.setVisible(visbility);

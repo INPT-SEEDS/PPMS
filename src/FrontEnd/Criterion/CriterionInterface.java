@@ -34,13 +34,13 @@ public class CriterionInterface extends Pane
 
         Image modifyIcon= new Image("file:res/icon/resource/Modify.png");
 
-        bar=JavaFX.NewButton("",black,2, 780, 95,550,10);
-        modify=JavaFX.NewButton("Modifier le critère", modifyIcon, ContentDisplay.LEFT, lightBlue, 16,1110 ,95 , 220, 32);
+        bar=JavaFX.NewButton("",black,2, 780, 85,550,10);
+        modify=JavaFX.NewButton("Modifier le critère", modifyIcon, ContentDisplay.LEFT, lightBlue, 16,1110 ,74 , 220, 32);
 
         getChildren().add(bar);
         getChildren().add(modify);
 
-        setActionBar(false,0);
+        setActionBar(false);
 
         tvCriteria = JavaFX.NewTableView(CriterionQueries.getResultSet(), 100,75, 1000, 400);
         Pane additionalOptions=new Pane();
@@ -48,8 +48,8 @@ public class CriterionInterface extends Pane
         additionalOptions.setLayoutY(75*scaley);
         modify.addEventFilter(MouseEvent.MOUSE_PRESSED, mouseEvent ->
         {
-            setActionBar(false,0);
-            setActionBar2(false,0);
+            setActionBar(false);
+            setActionBar2(false);
             setActive(false);
             CriterionModify criterionModify=new CriterionModify(this,0);
             additionalOptions.getChildren().add(criterionModify);
@@ -62,8 +62,8 @@ public class CriterionInterface extends Pane
             {
                 if (!row.isEmpty())
                 {
-                    setActionBar2(false,0);
-                    setActionBar(true,(int) (95+row.getIndex()*25/scaley));
+                    setActionBar2(false);
+                    setActionBar(true);
                     additionalOptions.getChildren().clear();
                 }
             });
@@ -93,8 +93,8 @@ public class CriterionInterface extends Pane
             setActive(false);
             idField.setText(String.valueOf(tvCriteria.getItems().size()));
             addPane.getChildren().addAll(addBar,idField,refField,libField,genreField,typeField,confirm,cancel);
-            setActionBar(false,0);
-            setActionBar2(false,0);
+            setActionBar(false);
+            setActionBar2(false);
             tvCriteria.getSelectionModel().clearSelection();
             tvType.getSelectionModel().clearSelection();
         });
@@ -121,13 +121,13 @@ public class CriterionInterface extends Pane
         getChildren().add(addPane);
 
         //-----------------------------------------------------------------------------------------------------------------------------------------------
-        bar2=JavaFX.NewButton("",black,2, 780, 95,550,10);
-        modify2=JavaFX.NewButton("Modifier le type", modifyIcon, ContentDisplay.LEFT, lightBlue, 16,1110 ,95 , 240, 32);
+        bar2=JavaFX.NewButton("",black,2, 780, 535,550,10);
+        modify2=JavaFX.NewButton("Modifier le type", modifyIcon, ContentDisplay.LEFT, lightBlue, 16,1110 ,524 , 240, 32);
 
         getChildren().add(bar2);
         getChildren().add(modify2);
 
-        setActionBar2(false,0);
+        setActionBar2(false);
 
         tvType =JavaFX.NewTableView(CriterionTypeQueries.getResultSet(), 100,525, 1000, 420);
         Pane additionalOptions2=new Pane();
@@ -135,8 +135,8 @@ public class CriterionInterface extends Pane
         additionalOptions2.setLayoutY(525*scaley);
         modify2.addEventFilter(MouseEvent.MOUSE_PRESSED, mouseEvent ->
         {
-            setActionBar(false,0);
-            setActionBar2(false,0);
+            setActionBar(false);
+            setActionBar2(false);
             setActive(false);
             TypeModify typeModify=new TypeModify(this,0);
             additionalOptions2.getChildren().add(typeModify);
@@ -149,8 +149,8 @@ public class CriterionInterface extends Pane
             {
                 if (!row.isEmpty())
                 {
-                    setActionBar2(true,(int) (545+row.getIndex()*25/scaley));
-                    setActionBar(false,0);
+                    setActionBar2(true);
+                    setActionBar(false);
                     additionalOptions2.getChildren().clear();
                 }
             });
@@ -179,8 +179,8 @@ public class CriterionInterface extends Pane
         {
             setActive(false);
             addPane2.getChildren().addAll(addBar2,id2Field,ref2Field,lib2Field,confirm2,cancel2);
-            setActionBar(false,0);
-            setActionBar2(false,0);
+            setActionBar(false);
+            setActionBar2(false);
             tvCriteria.getSelectionModel().clearSelection();
             tvType.getSelectionModel().clearSelection();
         });
@@ -208,21 +208,15 @@ public class CriterionInterface extends Pane
         getChildren().add(addPane2);
     }
 
-    private void setActionBar(boolean visbility,int position)
+    private void setActionBar(boolean visbility)
     {
-        modify.setLayoutY(position*scaley);
-        bar.setLayoutY((position+11)*scaley);
-
         modify.setVisible(visbility);
         bar.setVisible(visbility);
     }
 
 
-    private void setActionBar2(boolean visbility,int position)
+    private void setActionBar2(boolean visbility)
     {
-        modify2.setLayoutY(position*scaley);
-        bar2.setLayoutY((position+11)*scaley);
-
         modify2.setVisible(visbility);
         bar2.setVisible(visbility);
     }

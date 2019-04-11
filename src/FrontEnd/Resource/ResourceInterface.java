@@ -39,17 +39,17 @@ public class ResourceInterface extends Pane
         Image modifyIcon= new Image("file:res/icon/resource/Modify.png");
 
         //-Resource-Table------------------------------------------------------------------------------------------------------------------------------------
-        bar=JavaFX.NewButton("",black,2, 1100, 95,600,10);
-        assignToPortfolio=JavaFX.NewButton("Affecter au portefeuille", portfolioIcon, ContentDisplay.LEFT, lightOrange, 16,1110 ,95 , 240, 32);
-        assignToProject=JavaFX.NewButton("Affecter au projet", projectIcon, ContentDisplay.LEFT, lightOrange, 16,1360 ,95 , 220, 32);
-        modify=JavaFX.NewButton("Modifier", modifyIcon, ContentDisplay.LEFT, lightBlue, 16,1590 ,95 , 125, 32);
+        bar=JavaFX.NewButton("",black,2, 1100, 85,600,10);
+        assignToPortfolio=JavaFX.NewButton("Affecter au portefeuille", portfolioIcon, ContentDisplay.LEFT, lightOrange, 16,1110 ,74 , 240, 32);
+        assignToProject=JavaFX.NewButton("Affecter au projet", projectIcon, ContentDisplay.LEFT, lightOrange, 16,1360 ,74 , 220, 32);
+        modify=JavaFX.NewButton("Modifier", modifyIcon, ContentDisplay.LEFT, lightBlue, 16,1590 ,74 , 125, 32);
 
         getChildren().add(bar);
         getChildren().add(assignToPortfolio);
         getChildren().add(assignToProject);
         getChildren().add(modify);
 
-        setActionBar(false,0);
+        setActionBar(false);
 
         tvResource = JavaFX.NewTableView(ResourceQueries.getResultSet(), 100,75, 1000, 400);
         Pane additionalOptions=new Pane();
@@ -65,8 +65,8 @@ public class ResourceInterface extends Pane
             {
                 if (!row.isEmpty() && !editing)
                 {
-                    setActionBar2(false,0);
-                    setActionBar(true,(int) (95+row.getIndex()*25/scaley));
+                    setActionBar2(false);
+                    setActionBar(true);
                     additionalOptions.getChildren().clear();
                 }
             });
@@ -103,7 +103,7 @@ public class ResourceInterface extends Pane
         {
             if(!editing)
             {
-                setActionBar(false,0);
+                setActionBar(false);
                 setActive(false);
                 ResourceModify resourceModify=new ResourceModify(this,0);
                 additionalOptions.getChildren().add(resourceModify);
@@ -129,8 +129,8 @@ public class ResourceInterface extends Pane
         {
             setActive(false);
             addPane.getChildren().addAll(addBar,idField,idCatField,libField,confirm,cancel);
-            setActionBar(false,0);
-            setActionBar2(false,0);
+            setActionBar(false);
+            setActionBar2(false);
             tvCategory.getSelectionModel().clearSelection();
             tvResource.getSelectionModel().clearSelection();
         });
@@ -156,13 +156,13 @@ public class ResourceInterface extends Pane
 
 
         //-Category-Table------------------------------------------------------------------------------------------------------------------------------------
-        bar2=JavaFX.NewButton("",black,2, 780, 95,550,10);
-        modify2=JavaFX.NewButton("Modifier la Catégorie", modifyIcon, ContentDisplay.LEFT, lightBlue, 16,1110 ,95 , 240, 32);
+        bar2=JavaFX.NewButton("",black,2, 780, 535,550,10);
+        modify2=JavaFX.NewButton("Modifier la Catégorie", modifyIcon, ContentDisplay.LEFT, lightBlue, 16,1110 ,524 , 240, 32);
 
         getChildren().add(bar2);
         getChildren().add(modify2);
 
-        setActionBar2(false,0);
+        setActionBar2(false);
 
         tvCategory=JavaFX.NewTableView(ResourceCategoryQueries.getResultSet(), 100,525, 1000, 420);
         Pane additionalOptions2=new Pane();
@@ -170,8 +170,8 @@ public class ResourceInterface extends Pane
         additionalOptions2.setLayoutY(525*scaley);
         modify2.addEventFilter(MouseEvent.MOUSE_PRESSED, mouseEvent ->
         {
-            setActionBar(false,0);
-            setActionBar2(false,0);
+            setActionBar(false);
+            setActionBar2(false);
             setActive(false);
             CategoryModify categoryModify=new CategoryModify(this,0);
             additionalOptions2.getChildren().add(categoryModify);
@@ -185,8 +185,8 @@ public class ResourceInterface extends Pane
             {
                 if (!row.isEmpty())
                 {
-                    setActionBar2(true,(int) (545+row.getIndex()*25/scaley));
-                    setActionBar(false,0);
+                    setActionBar2(true);
+                    setActionBar(false);
                     additionalOptions2.getChildren().clear();
                 }
             });
@@ -215,8 +215,8 @@ public class ResourceInterface extends Pane
         {
             setActive(false);
             addPane2.getChildren().addAll(addBar2,id2Field,ref2Field,lib2Field,confirm2,cancel2);
-            setActionBar(false,0);
-            setActionBar2(false,0);
+            setActionBar(false);
+            setActionBar2(false);
             tvCategory.getSelectionModel().clearSelection();
             tvResource.getSelectionModel().clearSelection();
         });
@@ -244,13 +244,8 @@ public class ResourceInterface extends Pane
 
     }
 
-    private void setActionBar(boolean visbility,int position)
+    private void setActionBar(boolean visbility)
     {
-        assignToPortfolio.setLayoutY(position*scaley);
-        assignToProject.setLayoutY(position*scaley);
-        modify.setLayoutY(position*scaley);
-        bar.setLayoutY((position+11)*scaley);
-
         assignToPortfolio.setVisible(visbility);
         assignToProject.setVisible(visbility);
         modify.setVisible(visbility);
@@ -258,11 +253,8 @@ public class ResourceInterface extends Pane
     }
 
 
-    private void setActionBar2(boolean visbility,int position)
+    private void setActionBar2(boolean visbility)
     {
-        modify2.setLayoutY(position*scaley);
-        bar2.setLayoutY((position+11)*scaley);
-
         modify2.setVisible(visbility);
         bar2.setVisible(visbility);
     }

@@ -37,15 +37,15 @@ public class UserInterface extends Pane
 		Image disableIcon= new Image("file:res/icon/user/Disable.png");
 
 		//--User-Table--------------------------------------------------------------------------------------------------------------------------------
-		bar=JavaFX.NewButton("",black,2, 780, 95,775,10);
-		modify=JavaFX.NewButton("Modifier l'utilisateur", modifyIcon, ContentDisplay.LEFT, lightBlue, 16,1110 ,95 , 220, 32);
-		disable=JavaFX.NewButton("Desactiver l'utilisateur", disableIcon, ContentDisplay.LEFT, red, 16,1340 ,95 , 235, 32);
+		bar=JavaFX.NewButton("",black,2, 780, 85,775,10);
+		modify=JavaFX.NewButton("Modifier l'utilisateur", modifyIcon, ContentDisplay.LEFT, lightBlue, 16,1110 ,74 , 220, 32);
+		disable=JavaFX.NewButton("Desactiver l'utilisateur", disableIcon, ContentDisplay.LEFT, red, 16,1340 ,74 , 235, 32);
 		
 		getChildren().add(bar);
 		getChildren().add(modify);
 		getChildren().add(disable);
 
-		setActionBar(false,0);
+		setActionBar(false);
 	
 		tvUser=JavaFX.NewTableView(UserQueries.getResultSet(), 100,75, 1000, 400);
 		Pane additionalOptions=new Pane();
@@ -57,8 +57,8 @@ public class UserInterface extends Pane
 			{
 				if (!row.isEmpty())
 				{
-					setActionBar2(false,0);
-					setActionBar(true,(int) (95+row.getIndex()*25/scaley));
+					setActionBar2(false);
+					setActionBar(true);
 					additionalOptions.getChildren().clear();
 					tvProfile.getSelectionModel().clearSelection();
 				}
@@ -70,8 +70,8 @@ public class UserInterface extends Pane
 
 		modify.addEventFilter(MouseEvent.MOUSE_PRESSED, mouseEvent ->
 		{
-			setActionBar(false,0);
-			setActionBar2(false,0);
+			setActionBar(false);
+			setActionBar2(false);
 			setActive(false);
 			UserModify userModify=new UserModify(this,0);
 			additionalOptions.getChildren().add(userModify);
@@ -99,8 +99,8 @@ public class UserInterface extends Pane
 
 		add.addEventFilter(MouseEvent.MOUSE_PRESSED, mouseEvent ->
 		{
-			setActionBar(false,0);
-			setActionBar2(false,0);
+			setActionBar(false);
+			setActionBar2(false);
 			setActive(false);
 			addPane.getChildren().addAll(addBar,idField,usrField,fsField,lsField,phField,idProField,confirm,cancel);
 			tvUser.getSelectionModel().clearSelection();
@@ -129,13 +129,13 @@ public class UserInterface extends Pane
 		getChildren().add(addPane);
 
 		//--Profile-Table--------------------------------------------------------------------------------------------------------------------------------
-		bar2=JavaFX.NewButton("",black,2, 780, 95,500,10);
-		modify2=JavaFX.NewButton("Modifier le profile", modifyIcon, ContentDisplay.LEFT, lightBlue, 16,1110 ,95 , 200, 32);
+		bar2=JavaFX.NewButton("",black,2, 780, 535,500,10);
+		modify2=JavaFX.NewButton("Modifier le profile", modifyIcon, ContentDisplay.LEFT, lightBlue, 16,1110 ,524 , 200, 32);
 
 		getChildren().add(bar2);
 		getChildren().add(modify2);
 
-		setActionBar2(false,0);
+		setActionBar2(false);
 
 		tvProfile=JavaFX.NewTableView(ProfileQueries.getResultSet(), 100,525, 1000, 420);
 
@@ -144,8 +144,8 @@ public class UserInterface extends Pane
 		additionalOptions2.setLayoutY(525*scaley);
 		modify2.addEventFilter(MouseEvent.MOUSE_PRESSED, mouseEvent ->
 		{
-			setActionBar(false,0);
-			setActionBar2(false,0);
+			setActionBar(false);
+			setActionBar2(false);
 			setActive(false);
 			ProfileModify profileModify=new ProfileModify(this,0);
 			additionalOptions2.getChildren().add(profileModify);
@@ -158,8 +158,8 @@ public class UserInterface extends Pane
 			{
 				if (!row.isEmpty())
 				{
-					setActionBar2(true,(int) (545+row.getIndex()*25/scaley));
-					setActionBar(false,0);
+					setActionBar2(true);
+					setActionBar(false);
 					tvUser.getSelectionModel().clearSelection();
 					additionalOptions2.getChildren().clear();
 				}
@@ -186,8 +186,8 @@ public class UserInterface extends Pane
 
 		add2.addEventFilter(MouseEvent.MOUSE_PRESSED, mouseEvent ->
 		{
-			setActionBar(false,0);
-			setActionBar2(false,0);
+			setActionBar(false);
+			setActionBar2(false);
 			setActive(false);
 			addPane2.getChildren().addAll(addBar2,id2Field,ref2Field,lib2Field,confirm2,cancel2);
 			tvUser.getSelectionModel().clearSelection();
@@ -215,21 +215,16 @@ public class UserInterface extends Pane
 		getChildren().add(addPane2);
 	}
 
-	private void setActionBar(boolean visbility,int position)
+	private void setActionBar(boolean visbility)
 	{
-		modify.setLayoutY(position*scaley);
-		disable.setLayoutY(position*scaley);
-		bar.setLayoutY((position+11)*scaley);
 
 		modify.setVisible(visbility);
 		disable.setVisible(visbility);
 		bar.setVisible(visbility);
 	}
 
-	private void setActionBar2(boolean visbility,int position)
+	private void setActionBar2(boolean visbility)
 	{
-		modify2.setLayoutY(position*scaley);
-		bar2.setLayoutY((position+11)*scaley);
 
 		modify2.setVisible(visbility);
 		bar2.setVisible(visbility);

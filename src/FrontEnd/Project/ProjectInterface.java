@@ -27,7 +27,7 @@ public class ProjectInterface extends Pane
 	private Paint lightBlue=Paint.valueOf("5096be");
 	private Paint lightGreen=Paint.valueOf("50be96");
 
-	private Button bar,viewPortfolio,modify,evaluate;
+	private Button bar,modify,evaluate;
 	private Button bar2,modify2;
 	private Button add,add2;
 
@@ -44,18 +44,15 @@ public class ProjectInterface extends Pane
 		Image modifyIcon= new Image("file:res/icon/portfolio/Modify.png");
 		Image evaluateIcon=new Image("file:res/icon/portfolio/Evaluate.png");
 
-		bar=JavaFX.NewButton("",black,2, 780, 95,800,10);
-		viewPortfolio=JavaFX.NewButton("Voir le portefeuille", viewPortfolioIcon, ContentDisplay.LEFT, lightOrange, 16,1110 ,95 , 220, 32);
-		modify=JavaFX.NewButton("Modifier", modifyIcon, ContentDisplay.LEFT, lightBlue, 16,1340 ,95 , 130, 32);
-		evaluate=JavaFX.NewButton("Evaluer", evaluateIcon, ContentDisplay.LEFT, lightGreen, 16,1480 ,95 , 125, 32);
+		bar=JavaFX.NewButton("",black,2, 780, 85,550,10);
+		modify=JavaFX.NewButton("Modifier", modifyIcon, ContentDisplay.LEFT, lightBlue, 16,1110 ,74 , 130, 32);
+		evaluate=JavaFX.NewButton("Evaluer", evaluateIcon, ContentDisplay.LEFT, lightGreen, 16,1250 ,74 , 125, 32);
 
 
 		getChildren().add(bar);
-		getChildren().add(viewPortfolio);
 		getChildren().add(modify);
 		getChildren().add(evaluate);
 
-		viewPortfolio.setVisible(false);
 		modify.setVisible(false);
 		evaluate.setVisible(false);
 		bar.setVisible(false);
@@ -67,8 +64,8 @@ public class ProjectInterface extends Pane
 		additionalOptions.setLayoutY(75*scaley);
 		modify.addEventFilter(MouseEvent.MOUSE_PRESSED, mouseEvent ->
 		{
-			setActionBar(false,0);
-			setActionBar2(false,0);
+			setActionBar(false);
+			setActionBar2(false);
 			setActive(false);
 			Object row=tvProject.getSelectionModel().getSelectedItems().get(0);
 			int idProject = Integer.valueOf(row.toString().split(",")[0].substring(1));
@@ -78,8 +75,8 @@ public class ProjectInterface extends Pane
 
 		evaluate.addEventFilter(MouseEvent.MOUSE_PRESSED, mouseEvent ->
 		{
-			setActionBar(false,0);
-			setActionBar2(false,0);
+			setActionBar(false);
+			setActionBar2(false);
 			setActive(false);
 			Object row=tvProject.getSelectionModel().getSelectedItems().get(0);
 			int idProject = Integer.valueOf(row.toString().split(",")[0].substring(1));
@@ -96,8 +93,8 @@ public class ProjectInterface extends Pane
 				if (!row.isEmpty())
 				{
 					additionalOptions.getChildren().clear();
-					setActionBar(true,(int) (95+row.getIndex()*25/scaley));
-					setActionBar2(false,0);
+					setActionBar(true);
+					setActionBar2(false);
 					tvType.getSelectionModel().clearSelection();
 				}
 			});
@@ -128,8 +125,8 @@ public class ProjectInterface extends Pane
 		add.addEventFilter(MouseEvent.MOUSE_PRESSED, mouseEvent ->
 		{
 			idField.setText(String.valueOf(tvProject.getItems().size()));
-			setActionBar(false,0);
-			setActionBar2(false,0);
+			setActionBar(false);
+			setActionBar2(false);
 			tvProject.getSelectionModel().clearSelection();
 			setActive(false);
 			addPane.getChildren().addAll(addBar,idField,refField,porField,typeField,confirm,cancel);
@@ -159,13 +156,13 @@ public class ProjectInterface extends Pane
 		getChildren().add(addPane);
 
 		//-ProjectType-Table---------------------------------------------------------------------------------------------------------------------------------
-		bar2=JavaFX.NewButton("",black,2, 780, 95,550,10);
-		modify2=JavaFX.NewButton("Modifier la Catégorie", modifyIcon, ContentDisplay.LEFT, lightBlue, 16,1110 ,95 , 240, 32);
+		bar2=JavaFX.NewButton("",black,2, 780, 535,550,10);
+		modify2=JavaFX.NewButton("Modifier la Catégorie", modifyIcon, ContentDisplay.LEFT, lightBlue, 16,1110 ,524 , 240, 32);
 
 		getChildren().add(bar2);
 		getChildren().add(modify2);
 
-		setActionBar2(false,0);
+		setActionBar2(false);
 
 		tvType=JavaFX.NewTableView(ProjectTypeQueries.getResultSet(), 100,525, 1000, 420);
 
@@ -174,8 +171,8 @@ public class ProjectInterface extends Pane
 		additionalOptions2.setLayoutY(525*scaley);
 		modify2.addEventFilter(MouseEvent.MOUSE_PRESSED, mouseEvent ->
 		{
-			setActionBar(false,0);
-			setActionBar2(false,0);
+			setActionBar(false);
+			setActionBar2(false);
 			setActive(false);
 			CategoryModify categoryModify=new CategoryModify(this,0);
 			additionalOptions2.getChildren().add(categoryModify);
@@ -190,8 +187,8 @@ public class ProjectInterface extends Pane
 				if (!row.isEmpty())
 				{
 					additionalOptions2.getChildren().clear();
-					setActionBar2(true,(int) (545+row.getIndex()*25/scaley));
-					setActionBar(false,0);
+					setActionBar2(true);
+					setActionBar(false);
 					tvProject.getSelectionModel().clearSelection();
 				}
 			});
@@ -216,8 +213,8 @@ public class ProjectInterface extends Pane
 
 		add2.addEventFilter(MouseEvent.MOUSE_PRESSED, mouseEvent ->
 		{
-			setActionBar(false,0);
-			setActionBar2(false,0);
+			setActionBar(false);
+			setActionBar2(false);
 			tvType.getSelectionModel().clearSelection();
 			setActive(false);
 			addPane2.getChildren().addAll(addBar2,id2Field,ref2Field,lib2Field,confirm2,cancel2);
@@ -248,24 +245,15 @@ public class ProjectInterface extends Pane
 		getChildren().add(addPane2);
 	}
 
-	private void setActionBar(boolean visbility,int position)
+	private void setActionBar(boolean visbility)
 	{
-		viewPortfolio.setLayoutY(position*scaley);
-		evaluate.setLayoutY(position*scaley);
-		modify.setLayoutY(position*scaley);
-		bar.setLayoutY((position+11)*scaley);
-
-		viewPortfolio.setVisible(visbility);
 		evaluate.setVisible(visbility);
 		modify.setVisible(visbility);
 		bar.setVisible(visbility);
 	}
 
-	private void setActionBar2(boolean visbility,int position)
+	private void setActionBar2(boolean visbility)
 	{
-		modify2.setLayoutY(position*scaley);
-		bar2.setLayoutY((position+11)*scaley);
-
 		modify2.setVisible(visbility);
 		bar2.setVisible(visbility);
 	}
