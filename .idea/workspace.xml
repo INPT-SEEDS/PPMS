@@ -9,7 +9,37 @@
     <bookmark url="file://$PROJECT_DIR$/src/FrontEnd/User/ProfileModify.java" line="50" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="" />
+    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/PPMS/BackEnd/Algorithms/Composition.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PPMS/BackEnd/Algorithms/Composition.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/PPMS/BackEnd/Algorithms/Priorisation.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PPMS/BackEnd/Algorithms/Priorisation.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/PPMS/BackEnd/Evaluate/EvaluateQueries.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PPMS/BackEnd/Evaluate/EvaluateQueries.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/PPMS/BackEnd/PortfolioCriteria/PortfolioCriteria.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PPMS/BackEnd/PortfolioCriteria/PortfolioCriteria.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/PPMS/BackEnd/PortfolioCriteria/PortfolioCriteriaQueries.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PPMS/BackEnd/PortfolioCriteria/PortfolioCriteriaQueries.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/PPMS/BackEnd/Project/Project.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PPMS/BackEnd/Project/Project.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/PPMS/BackEnd/Project/ProjectQueries.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PPMS/BackEnd/Project/ProjectQueries.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/PPMS/BackEnd/Utility.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PPMS/BackEnd/Utility.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/PPMS/FrontEnd/Home.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PPMS/FrontEnd/Home.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/PPMS/FrontEnd/Portfolio/PortfolioInterface.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PPMS/FrontEnd/Portfolio/PortfolioInterface.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/PPMS/FrontEnd/Portfolio/PortfolioTreat.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PPMS/FrontEnd/Portfolio/PortfolioTreat.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/PPMS/Interface/CritereWindow.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/PPMS/Interface/Objects.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/priorisation.db" beforeDir="false" afterPath="$PROJECT_DIR$/priorisation.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BackEnd/Algorithms/Composition.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BackEnd/Algorithms/Composition.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BackEnd/Algorithms/Priorisation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BackEnd/Algorithms/Priorisation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BackEnd/Evaluate/EvaluateQueries.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BackEnd/Evaluate/EvaluateQueries.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BackEnd/PortfolioCriteria/PortfolioCriteria.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BackEnd/PortfolioCriteria/PortfolioCriteria.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BackEnd/PortfolioCriteria/PortfolioCriteriaQueries.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BackEnd/PortfolioCriteria/PortfolioCriteriaQueries.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BackEnd/Project/Project.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BackEnd/Project/Project.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BackEnd/Project/ProjectQueries.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BackEnd/Project/ProjectQueries.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BackEnd/Utility.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BackEnd/Utility.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FrontEnd/Home.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/Home.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FrontEnd/Portfolio/PortfolioInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/Portfolio/PortfolioInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FrontEnd/Portfolio/PortfolioTreat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrontEnd/Portfolio/PortfolioTreat.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Interface/CritereWindow.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Interface/JavaFX.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Interface/JavaFX.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Interface/Objects.java" beforeDir="false" />
+    </list>
     <ignored path="JavaFxApplication.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/out/" />
@@ -74,20 +104,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/FrontEnd/User/ProfileModify.java">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/FrontEnd/Home.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="399">
-              <caret line="31" column="21" selection-start-line="31" selection-start-column="21" selection-end-line="31" selection-end-column="21" />
+            <state relative-caret-position="228">
+              <caret line="84" column="8" selection-start-line="84" selection-start-column="8" selection-end-line="84" selection-end-column="8" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Interface/JavaFX.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="364">
-              <caret line="185" column="25" selection-start-line="185" selection-start-column="25" selection-end-line="185" selection-end-column="25" />
+            <state relative-caret-position="597">
+              <caret line="87" column="42" selection-start-line="87" selection-start-column="42" selection-end-line="87" selection-end-column="42" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -96,90 +126,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/BackEnd/Profile/Profile.java">
+        <entry file="file://$PROJECT_DIR$/src/FrontEnd/Portfolio/PortfolioTreat.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="15" column="28" selection-start-line="15" selection-start-column="28" selection-end-line="15" selection-end-column="28" />
-              <folding>
-                <element signature="e#313#314#0" expanded="true" />
-                <element signature="e#345#346#0" expanded="true" />
-                <element signature="e#373#374#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/BackEnd/Profile/ProfileQueries.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="247">
-              <caret line="18" column="55" selection-start-line="18" selection-start-column="55" selection-end-line="18" selection-end-column="55" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/BackEnd/User/User.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="209">
-              <caret line="11" column="11" selection-start-line="11" selection-start-column="11" selection-end-line="11" selection-end-column="11" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/FrontEnd/User/UserModify.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="874">
-              <caret line="57" selection-start-line="57" selection-end-line="59" selection-end-column="65" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/BackEnd/User/UserQueries.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="247">
-              <caret line="16" column="8" selection-start-line="16" selection-start-column="8" selection-end-line="34" selection-end-column="20" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/BackEnd/Project/ProjectQueries.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="570">
-              <caret line="40" column="20" selection-start-line="25" selection-start-column="8" selection-end-line="40" selection-end-column="20" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/FrontEnd/Project/ProjectModify.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1691">
-              <caret line="105" column="56" selection-start-line="105" selection-start-column="50" selection-end-line="105" selection-end-column="56" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/FrontEnd/User/UserInterface.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1995">
-              <caret line="115" column="32" selection-start-line="115" selection-start-column="32" selection-end-line="115" selection-end-column="32" />
+            <state relative-caret-position="161">
+              <caret line="73" column="41" selection-start-line="73" selection-start-column="41" selection-end-line="73" selection-end-column="41" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -205,6 +155,9 @@
       <find>System.out.print</find>
       <find>int</find>
       <find>refreshTable2</find>
+      <find>resetEvaluation</find>
+      <find>getProjectEvaluation</find>
+      <find>getCtriteriaValues</find>
     </findStrings>
   </component>
   <component name="FindManager">
@@ -218,10 +171,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/BackEnd/ResToProject/ResToPortfolioQueries.java" />
-        <option value="$PROJECT_DIR$/src/BackEnd/ProjectType/ProjectTypeQueries.java" />
-        <option value="$PROJECT_DIR$/src/BackEnd/PortfolioCriteria/PortfolioCriteriaQueries.java" />
-        <option value="$PROJECT_DIR$/src/BackEnd/PortfolioCriteria/PortfolioCriteria.java" />
         <option value="$PROJECT_DIR$/src/BackEnd/Criterion/Criterion.java" />
         <option value="$PROJECT_DIR$/src/FrontEnd/Project/ProjectCriteria.java" />
         <option value="$PROJECT_DIR$/src/BackEnd/Resource/Resource.java" />
@@ -236,30 +185,21 @@
         <option value="$PROJECT_DIR$/src/BackEnd/CriterionType/CriterionTypeQueries.java" />
         <option value="$PROJECT_DIR$/src/BackEnd/Criterion/CriterionQueries.java" />
         <option value="$PROJECT_DIR$/src/BackEnd/ProjectStatue/ProjectStatue.java" />
-        <option value="$PROJECT_DIR$/src/BackEnd/Utility.java" />
         <option value="$PROJECT_DIR$/src/BackEnd/ProjectStatue/ProjectStatueQueries.java" />
         <option value="$PROJECT_DIR$/src/treatment/priorisation/Composition.java" />
         <option value="$PROJECT_DIR$/src/treatment/priorisation/Simple.java" />
         <option value="$PROJECT_DIR$/src/treatment/Main.java" />
         <option value="$PROJECT_DIR$/src/BackEnd/ResToProject/ResToProjectQueries.java" />
-        <option value="$PROJECT_DIR$/src/Interface/JavaFX.java" />
         <option value="$PROJECT_DIR$/src/BackEnd/Evaluate/Evaluate.java" />
-        <option value="$PROJECT_DIR$/src/BackEnd/Evaluate/EvaluateQueries.java" />
         <option value="$PROJECT_DIR$/src/FrontEnd/Project/ProjectEvaluate.java" />
         <option value="$PROJECT_DIR$/src/BackEnd/Algorithms/Composition.java" />
-        <option value="$PROJECT_DIR$/src/BackEnd/Algorithms/Priorisation.java" />
         <option value="$PROJECT_DIR$/src/BackEnd/Algorithms/Simple.java" />
         <option value="$PROJECT_DIR$/src/BackEnd/ResourceCategory/ResourceCategorieQueries.java" />
         <option value="$PROJECT_DIR$/src/FrontEnd/Criterion/CriterionInterface.java" />
         <option value="$PROJECT_DIR$/src/FrontEnd/Resource/ResourceInterface.java" />
-        <option value="$PROJECT_DIR$/src/BackEnd/Portfolio/Portfolio.java" />
         <option value="$PROJECT_DIR$/src/BackEnd/Portfolio/PortfolioQueries.java" />
         <option value="$PROJECT_DIR$/src/BackEnd/Queries.java" />
-        <option value="$PROJECT_DIR$/src/FrontEnd/Portfolio/PortfolioInterface.java" />
         <option value="$PROJECT_DIR$/src/FrontEnd/Portfolio/PortfolioModify.java" />
-        <option value="$PROJECT_DIR$/src/BackEnd/Project/Project.java" />
-        <option value="$PROJECT_DIR$/src/FrontEnd/Portfolio/PortfolioTreat.java" />
-        <option value="$PROJECT_DIR$/src/BackEnd/Project/ProjectQueries.java" />
         <option value="$PROJECT_DIR$/src/FrontEnd/Project/ProjectModify.java" />
         <option value="$PROJECT_DIR$/src/FrontEnd/Project/ProjectInterface.java" />
         <option value="$PROJECT_DIR$/src/BackEnd/User/User.java" />
@@ -269,6 +209,19 @@
         <option value="$PROJECT_DIR$/src/BackEnd/Profile/ProfileQueries.java" />
         <option value="$PROJECT_DIR$/src/BackEnd/Profile/Profile.java" />
         <option value="$PROJECT_DIR$/src/FrontEnd/User/ProfileModify.java" />
+        <option value="$PROJECT_DIR$/src/Interface/CritereWindow.java" />
+        <option value="$PROJECT_DIR$/src/BackEnd/Utility.java" />
+        <option value="$PROJECT_DIR$/src/FrontEnd/Portfolio/PortfolioInterface.java" />
+        <option value="$PROJECT_DIR$/src/BackEnd/Portfolio/Portfolio.java" />
+        <option value="$PROJECT_DIR$/src/BackEnd/PortfolioCriteria/PortfolioCriteriaQueries.java" />
+        <option value="$PROJECT_DIR$/src/FrontEnd/Portfolio/PortfolioTreat.java" />
+        <option value="$PROJECT_DIR$/src/BackEnd/Project/Project.java" />
+        <option value="$PROJECT_DIR$/src/BackEnd/Evaluate/EvaluateQueries.java" />
+        <option value="$PROJECT_DIR$/src/BackEnd/Project/ProjectQueries.java" />
+        <option value="$PROJECT_DIR$/src/BackEnd/PortfolioCriteria/PortfolioCriteria.java" />
+        <option value="$PROJECT_DIR$/src/BackEnd/Algorithms/Priorisation.java" />
+        <option value="$PROJECT_DIR$/src/Interface/JavaFX.java" />
+        <option value="$PROJECT_DIR$/src/FrontEnd/Home.java" />
       </list>
     </option>
   </component>
@@ -294,8 +247,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -312,33 +263,6 @@
               <item name="PPMS" type="b2602c69:ProjectViewProjectNode" />
               <item name="PPMS" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="BackEnd" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="PPMS" type="b2602c69:ProjectViewProjectNode" />
-              <item name="PPMS" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="BackEnd" type="462c0819:PsiDirectoryNode" />
-              <item name="Profile" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="PPMS" type="b2602c69:ProjectViewProjectNode" />
-              <item name="PPMS" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="BackEnd" type="462c0819:PsiDirectoryNode" />
-              <item name="Project" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="PPMS" type="b2602c69:ProjectViewProjectNode" />
-              <item name="PPMS" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="BackEnd" type="462c0819:PsiDirectoryNode" />
-              <item name="User" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="PPMS" type="b2602c69:ProjectViewProjectNode" />
-              <item name="PPMS" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="FrontEnd" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -346,7 +270,7 @@
               <item name="PPMS" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="FrontEnd" type="462c0819:PsiDirectoryNode" />
-              <item name="User" type="462c0819:PsiDirectoryNode" />
+              <item name="Portfolio" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="PPMS" type="b2602c69:ProjectViewProjectNode" />
@@ -358,6 +282,8 @@
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -369,7 +295,7 @@
     <property name="MemberChooser.sorted" value="false" />
     <property name="OverrideImplement.combined" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1552912295761" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1554989769533" />
     <property name="dynamic.classpath" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/res/lib/sqlite-jdbc-3.23.1.jar!/" />
     <property name="project.structure.last.edited" value="Artifacts" />
@@ -510,8 +436,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.6703755" visible="true" weight="0.13486141" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.6703755" visible="true" weight="0.1369936" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info id="Favorites" order="2" weight="0.32995737" />
       <window_info id="Designer" order="3" />
@@ -520,7 +447,7 @@
       <window_info id="Capture Tool" order="6" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32936078" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.20476706" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.20476706" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3997833" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -557,20 +484,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/FrontEnd/Criterion/TypeModify.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
-          <caret line="29" column="8" selection-start-line="29" selection-start-column="8" selection-end-line="29" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/treatment/Project.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
-          <caret line="4" column="13" selection-end-line="53" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files/Java/jdk-10.0.2/lib/src.zip!/javafx.graphics/javafx/scene/layout/Pane.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="550">
@@ -579,13 +492,6 @@
             <element signature="e#4689#4690#0" expanded="true" />
             <element signature="e#4731#4732#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/FrontEnd/Home.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="57" column="8" selection-start-line="57" selection-start-column="8" selection-end-line="57" selection-end-column="8" />
         </state>
       </provider>
     </entry>
@@ -607,25 +513,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="721">
           <caret line="51" selection-start-line="51" selection-end-line="51" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/BackEnd/PortfolioCriteria/PortfolioCriteriaQueries.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
-          <caret line="18" column="8" selection-start-line="18" selection-start-column="8" selection-end-line="33" selection-end-column="28" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1192#1193#0" expanded="true" />
-            <element signature="e#1266#1267#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/BackEnd/PortfolioCriteria/PortfolioCriteria.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="38">
-          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
         </state>
       </provider>
     </entry>
@@ -686,16 +573,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/BackEnd/Criterion/CriterionQueries.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="15" selection-start-line="15" selection-end-line="15" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/BackEnd/CriterionType/CriterionType.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="380">
@@ -706,42 +583,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/BackEnd/ProjectStatue/ProjectStatue.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="21" column="4" selection-start-line="21" selection-start-column="4" selection-end-line="21" selection-end-column="4" />
-          <folding>
-            <element signature="e#375#376#0" expanded="true" />
-            <element signature="e#407#408#0" expanded="true" />
-            <element signature="e#469#470#0" expanded="true" />
-            <element signature="e#382#383#0" expanded="true" />
-            <element signature="e#421#422#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/BackEnd/Utility.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="9" column="49" selection-start-line="9" selection-start-column="49" selection-end-line="9" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/BackEnd/ProjectStatue/ProjectStatueQueries.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1">
           <caret line="5" column="29" lean-forward="true" selection-start-line="5" selection-start-column="29" selection-end-line="5" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/BackEnd/Criterion/Criterion.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="26" lean-forward="true" selection-start-column="26" selection-end-column="26" />
-          <folding>
-            <element signature="e#536#537#0" expanded="true" />
-            <element signature="e#564#565#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -773,46 +618,6 @@
             <element signature="e#1489#1490#0" expanded="true" />
             <element signature="e#1559#1560#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/BackEnd/Evaluate/Evaluate.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="349">
-          <caret line="22" column="17" selection-start-line="22" selection-start-column="17" selection-end-line="22" selection-end-column="17" />
-          <folding>
-            <element signature="e#385#386#0" expanded="true" />
-            <element signature="e#417#418#0" expanded="true" />
-            <element signature="e#450#451#0" expanded="true" />
-            <element signature="e#478#479#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/FrontEnd/Project/ProjectEvaluate.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="60" column="38" selection-start-line="60" selection-start-column="38" selection-end-line="60" selection-end-column="38" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/BackEnd/Evaluate/EvaluateQueries.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="26" column="40" selection-start-line="26" selection-start-column="40" selection-end-line="26" selection-end-column="40" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/BackEnd/Algorithms/Priorisation.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2147">
-          <caret line="113" column="47" selection-start-line="113" selection-start-column="47" selection-end-line="113" selection-end-column="47" />
         </state>
       </provider>
     </entry>
@@ -878,29 +683,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/FrontEnd/Portfolio/PortfolioInterface.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1352">
-          <caret line="160" column="10" selection-start-line="160" selection-start-column="10" selection-end-line="160" selection-end-column="10" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/BackEnd/Portfolio/Portfolio.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="26" lean-forward="true" selection-start-column="26" selection-end-column="26" />
-          <folding>
-            <element signature="e#255#256#0" expanded="true" />
-            <element signature="e#272#273#0" expanded="true" />
-            <element signature="e#301#302#0" expanded="true" />
-            <element signature="e#320#321#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/BackEnd/Portfolio/PortfolioQueries.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
@@ -913,43 +695,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/BackEnd/Project/Project.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-282">
-          <caret line="40" column="4" selection-start-line="40" selection-start-column="4" selection-end-line="40" selection-end-column="4" />
-          <folding>
-            <element signature="e#741#742#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/BackEnd/Queries.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="236">
           <caret line="45" column="28" selection-start-line="45" selection-start-column="28" selection-end-line="45" selection-end-column="28" />
           <folding>
             <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/FrontEnd/Portfolio/PortfolioTreat.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
-          <caret line="61" column="64" selection-start-line="61" selection-start-column="64" selection-end-line="61" selection-end-column="64" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/FrontEnd/Project/ProjectInterface.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="383">
-          <caret line="283" column="36" lean-forward="true" selection-start-line="283" selection-start-column="36" selection-end-line="283" selection-end-column="36" />
-          <folding>
-            <element signature="e#9504#9505#0" expanded="true" />
-            <element signature="e#9570#9571#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1012,18 +763,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/BackEnd/User/UserQueries.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
+        <state relative-caret-position="267">
           <caret line="16" column="8" selection-start-line="16" selection-start-column="8" selection-end-line="34" selection-end-column="20" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/BackEnd/Project/ProjectQueries.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="570">
-          <caret line="40" column="20" selection-start-line="25" selection-start-column="8" selection-end-line="40" selection-end-column="20" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1047,13 +788,183 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Interface/JavaFX.java">
+    <entry file="file://$PROJECT_DIR$/src/Interface/CritereWindow.java" />
+    <entry file="file://$PROJECT_DIR$/src/Interface/Objects.java" />
+    <entry file="file://$PROJECT_DIR$/src/BackEnd/Utility.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="364">
-          <caret line="185" column="25" selection-start-line="185" selection-start-column="25" selection-end-line="185" selection-end-column="25" />
+        <state relative-caret-position="323">
+          <caret line="17" column="49" selection-start-line="17" selection-start-column="49" selection-end-line="17" selection-end-column="49" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FrontEnd/Project/ProjectInterface.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="418">
+          <caret line="72" column="12" lean-forward="true" selection-start-line="72" selection-start-column="12" selection-end-line="73" selection-end-column="87" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FrontEnd/Project/ProjectEvaluate.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1054">
+          <caret line="83" column="13" lean-forward="true" selection-start-line="83" selection-start-column="13" selection-end-line="83" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/BackEnd/Criterion/CriterionQueries.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-226">
+          <caret line="15" selection-start-line="15" selection-end-line="15" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/BackEnd/Portfolio/Portfolio.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="6" column="25" lean-forward="true" selection-start-line="6" selection-start-column="25" selection-end-line="6" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/BackEnd/Criterion/Criterion.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="38">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+          <folding>
+            <element signature="e#536#537#0" expanded="true" />
+            <element signature="e#564#565#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/BackEnd/ProjectStatue/ProjectStatue.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="38">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+          <folding>
+            <element signature="e#375#376#0" expanded="true" />
+            <element signature="e#407#408#0" expanded="true" />
+            <element signature="e#444#445#0" expanded="true" />
+            <element signature="e#473#474#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/BackEnd/Evaluate/Evaluate.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="38">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/BackEnd/Project/ProjectQueries.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="236">
+          <caret line="43" column="32" selection-start-line="43" selection-start-column="32" selection-end-line="43" selection-end-column="32" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/BackEnd/Project/Project.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="389">
+          <caret line="81" column="49" selection-start-line="81" selection-start-column="49" selection-end-line="81" selection-end-column="49" />
+          <folding>
+            <element signature="e#1432#1433#0" expanded="true" />
+            <element signature="e#1463#1464#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/BackEnd/PortfolioCriteria/PortfolioCriteriaQueries.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="477">
+          <caret line="36" column="5" lean-forward="true" selection-start-line="36" selection-start-column="5" selection-end-line="36" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1192#1193#0" expanded="true" />
+            <element signature="e#1266#1267#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FrontEnd/Portfolio/PortfolioInterface.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="368">
+          <caret line="79" column="46" selection-start-line="79" selection-start-column="46" selection-end-line="79" selection-end-column="46" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/BackEnd/Evaluate/EvaluateQueries.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="266">
+          <caret line="17" column="53" selection-start-line="17" selection-start-column="33" selection-end-line="17" selection-end-column="53" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/BackEnd/PortfolioCriteria/PortfolioCriteria.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="34" lean-forward="true" selection-start-column="34" selection-end-column="34" />
+          <folding>
+            <element signature="e#456#457#0" expanded="true" />
+            <element signature="e#485#486#0" expanded="true" />
+            <element signature="e#521#522#0" expanded="true" />
+            <element signature="e#549#550#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/BackEnd/Algorithms/Priorisation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="817">
+          <caret line="111" column="17" selection-start-line="111" selection-start-column="17" selection-end-line="111" selection-end-column="17" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FrontEnd/Portfolio/PortfolioTreat.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="161">
+          <caret line="73" column="41" selection-start-line="73" selection-start-column="41" selection-end-line="73" selection-end-column="41" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Interface/JavaFX.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="597">
+          <caret line="87" column="42" selection-start-line="87" selection-start-column="42" selection-end-line="87" selection-end-column="42" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FrontEnd/Home.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="84" column="8" selection-start-line="84" selection-start-column="8" selection-end-line="84" selection-end-column="8" />
         </state>
       </provider>
     </entry>

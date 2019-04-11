@@ -1,7 +1,5 @@
 package BackEnd.Project;
 
-import BackEnd.Evaluate.Evaluate;
-import BackEnd.Evaluate.EvaluateQueries;
 import BackEnd.Queries;
 
 import java.sql.ResultSet;
@@ -55,12 +53,6 @@ public class ProjectQueries
                 int idType=rs.getInt(4);
                 projects.add(new Project(id,label,idPortfolio,idType));
             }
-            for(Project project:projects)
-            {
-                List<Evaluate> projectEvaluation= EvaluateQueries.getProjectEvaluation(project.getId());
-                project.setProjectEvaluation(projectEvaluation);
-            }
-
         }
         catch (SQLException e)
         {e.printStackTrace();}

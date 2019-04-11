@@ -24,8 +24,8 @@ public class PortfolioCriteriaQueries
             {
                 int id=rs.getInt(1);
                 int weight=rs.getInt(3);
-                String usage=rs.getString(5);
-                criteriaList.add(new PortfolioCriteria(id,idPortfolio,weight,usage));
+                String genre=rs.getString(9);
+                criteriaList.add(new PortfolioCriteria(id,idPortfolio,weight,genre));
             }
         }
         catch (SQLException e)

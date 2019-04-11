@@ -13,7 +13,7 @@ public class Project
 	private String label;
 	private int idPortfolio;
 	private int idType;
-	private float value;
+	private float totalValue;
 
 	private List<Evaluate> projectEvaluation;
 
@@ -77,8 +77,9 @@ public class Project
 		return projectEvaluation;
 	}
 
-	public double[] getWeights()
+	public double[] getCtriteriaValues()
 	{
+		this.projectEvaluation = EvaluateQueries.getProjectEvaluation(id);
 		double[] ret=new double[projectEvaluation.size()];
 		int index=0;
 		for(Evaluate e:projectEvaluation)
@@ -89,19 +90,14 @@ public class Project
 		return ret;
 	}
 
-	public void initProjectEvaluation()
+	public float getTotalValue()
 	{
-		this.projectEvaluation = EvaluateQueries.getProjectEvaluation(id);
+		return totalValue;
 	}
 
-	public float getValue()
+	public void setTotalValue(float totalValue)
 	{
-		return value;
-	}
-
-	public void setValue(float value)
-	{
-		this.value = value;
+		this.totalValue = totalValue;
 	}
 
 

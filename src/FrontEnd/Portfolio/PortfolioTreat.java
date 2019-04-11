@@ -102,22 +102,23 @@ public class PortfolioTreat extends ScrollPane
             {
                 cardPane.getChildren().clear();
 
-                double[][] matrix= new double[projectsList.size()][1];
+                /*double[][] matrix= new double[projectsList.size()][1];
                 int index=0;
                 for(Project project:projectsList)
                 {
                     project.initProjectEvaluation();
-                    matrix[index]=project.getWeights();
+                    matrix[index]=project.getCtriteriaValues();
                     index++;
                 }
-                double[] values= Priorisation.algorithme(matrix,11,5);
-                index=0;
+                double[] values= Priorisation.algorithme(matrix,11);*/
+                Priorisation.algorithme(projectsList);
+                int index=0;
                 for(Project project:projectsList)
                 {
-                    float value= (float) ((int)(1000*values[index]))/1000;
-                    project.setValue(value);
+                    /*float value= (float) ((int)(1000*values[index]))/1000;
+                    project.setTotalValue(value);*/
                     cardPane.getChildren().add(JavaFX.NewLabel(project.getLabel(),1,18,50,y+3));
-                    Button projectValue=JavaFX.NewButton(String.valueOf(value),lightOrange,18,375,y,100,40);
+                    Button projectValue=JavaFX.NewButton(String.valueOf(project.getTotalValue()),lightOrange,18,375,y,100,40);
                     cardPane.getChildren().add((projectValue));
                     index++;
                     y+=50;

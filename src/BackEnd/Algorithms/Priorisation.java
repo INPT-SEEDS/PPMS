@@ -1,17 +1,22 @@
 package BackEnd.Algorithms;
 
+import BackEnd.PortfolioCriteria.PortfolioCriteria;
+import BackEnd.PortfolioCriteria.PortfolioCriteriaQueries;
+import BackEnd.Project.Project;
+
+import java.util.List;
+
 public class Priorisation
 {
     static double maxcol(double[][] b, int i)
     {
         double max=b[0][i];
-        for(int j=0;j<b.length;j++)
+        for (double[] doubles : b)
         {
-            if(b[j][i]>max)
+            if (doubles[i] > max)
             {
-                max=b[j][i];
+                max = doubles[i];
             }
-
         }
         return max;
 
@@ -20,13 +25,12 @@ public class Priorisation
     static double mincol(double[][] b, int i)
     {
         double min=b[0][i];
-        for(int j=0;j<b.length;j++)
+        for (double[] doubles : b)
         {
-            if(b[j][i]<min)
+            if (doubles[i] < min)
             {
-                min=b[j][i];
+                min = doubles[i];
             }
-
         }
         return min;
 
@@ -34,85 +38,111 @@ public class Priorisation
     static double sommetab(double[] a)
     {
         double s=0;
-        for(int j=0;j<a.length;j++)
+        for (double v : a)
         {
-            s=s+a[j];
+            s = s + v;
         }
         return s;
     }
     static double sommecol(double[][] a, int i)
     {
         double s=0;
-        for(int j=0;j<a.length;j++)
+        for (double[] doubles : a)
         {
-            s=s+a[j][i];
+            s = s + doubles[i];
         }
         return s;
     }
-    public static double[] algorithme(double[][] a, int x, int y)
+
+    public static void algorithme(List<Project> projectsList)
     {
-        int ligne=a.length;
-        int col=a[0].length;
-        double[][] matderiv = new double[ligne][col];
-        double[][] matproduit = new double[ligne][col];
-        double[][] matfinale = new double[ligne][col];
-        double[] tabsomme = new double[col];
-        double[] tabmax = new double[col];
-        double[] m = new double[col];
-        double[] resultat = new double[ligne];
+        int portfolioId=projectsList.get(0).getIdPortfolio();
+        System.out.println(portfolioId);
+        List<PortfolioCriteria> criteriaList= PortfolioCriteriaQueries.getCriteriaByPortfolio(portfolioId);
+
+        int projectsCount=projectsList.size();
+        int criteriaCount=criteriaList.size();
+
+        double[][] matderiv = new double[projectsCount][criteriaCount];
+        double[][] matproduit = new double[projectsCount][criteriaCount];
+        double[][] matfinale = new double[projectsCount][criteriaCount];
+        double[] tabsomme = new double[criteriaCount];
+        double[] tabmax = new double[criteriaCount];
+        double[] m = new double[criteriaCount];
         double s;
-        for(int i=0;i<x;i++)
-        {
-            tabmax[i]=maxcol(a,i);
-            //System.out.println(tabmax[i]);
-        }
-        for(int i=x;i<col;i++)
-        {
-            tabmax[i]=mincol(a,i);
-            //System.out.println(tabmax[i]);
-        }
 
-        for(int i=0;i<ligne;i++)
+        double[][] a= new double[projectsCount][criteriaCount];
+        int index=0;
+        for(Project project:projectsList)
         {
-            for(int j=0;j<x;j++)
+            int j=0;
+            double[] values=project.getCtriteriaValues();
+            for(PortfolioCriteria criterion:criteriaList)
             {
-                matderiv[i][j]=a[i][j]/tabmax[j];
-
+                a[index][j]=values[j]*criterion.getWeight();
+                System.out.println(criterion.getWeight());
+                j++;
             }
-            for(int j=x;j<col;j++)
-            {
-                matderiv[i][j]=tabmax[j]/a[i][j];
+            index++;
+        }
 
+        for(int i=0;i<criteriaCount;i++)
+        {
+            if(criteriaList.get(i).getGenre().equals("positif"))
+            {
+                tabmax[i]=maxcol(a,i);
+            }
+            else
+            {
+                tabmax[i]=mincol(a,i);
             }
         }
 
-        for(int i=0;i<ligne;i++)
+        for(int i=0;i<projectsCount;i++)
         {
-            for(int j=0;j<col;j++)
+            for(int j=0;j<criteriaCount;j++)
+            {
+                if(criteriaList.get(j).getGenre().equals("positif"))
+                {
+                    matderiv[i][j]=a[i][j]/tabmax[j];
+                }
+                else
+                {
+                    matderiv[i][j]=tabmax[j]/a[i][j];
+                }
+            }
+        }
+
+        for(int i=0;i<projectsCount;i++)
+        {
+            for(int j=0;j<criteriaCount;j++)
             {
                 matproduit[i][j]=matderiv[i][j]*Math.log(matderiv[i][j]);
             }
         }
-        for(int i=0;i<col;i++)
+        for(int i=0;i<criteriaCount;i++)
         {
-            tabsomme[i]=1-(-(1/Math.log(y))*sommecol(matproduit,i));
+            tabsomme[i]=1-(-(1/Math.log(projectsCount))*sommecol(matproduit,i));
         }
         s=sommetab(tabsomme);
-        for(int i=0;i<col;i++)
+        for(int i=0;i<criteriaCount;i++)
         {
             m[i]=tabsomme[i]/s;
         }
-        for(int i=0;i<ligne;i++)
+        for(int i=0;i<projectsCount;i++)
         {
-            for(int j=0;j<col;j++)
+            for(int j=0;j<criteriaCount;j++)
             {
                 matfinale[i][j]=matderiv[i][j]*m[j];
             }
         }
-        for(int i=0;i<ligne;i++)
+
+        int i=0;
+        for(Project project:projectsList)
         {
-            resultat[i]=sommetab(matfinale[i]);
+            float value= (float) ((int)(10000*sommetab(matfinale[i])))/10000;
+            project.setTotalValue(value);
+            i++;
         }
-        return resultat;
     }
 }

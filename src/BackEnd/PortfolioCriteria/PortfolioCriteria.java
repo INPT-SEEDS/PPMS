@@ -5,14 +5,14 @@ public class PortfolioCriteria
     private int id;
     private int idPortfolio;
     private int weight;
-    private String usage;
+    private String genre;
 
-    public PortfolioCriteria(int id,int idPortfolio,int weight,String usage)
+    public PortfolioCriteria(int id,int idPortfolio,int weight,String genre)
     {
         this.id=id;
         this.idPortfolio=idPortfolio;
         this.weight=weight;
-        this.usage=usage;
+        this.genre=genre;
     }
 
     public int getId()
@@ -22,5 +22,10 @@ public class PortfolioCriteria
     public int getWeight()
     {
         return weight;
+    }
+
+    public String getGenre()
+    {
+        return genre;
     }
 }

@@ -1,6 +1,7 @@
 package FrontEnd.Portfolio;
 
 import BackEnd.Portfolio.PortfolioQueries;
+import BackEnd.Utility;
 import FrontEnd.Home;
 import Interface.JavaFX;
 import javafx.scene.control.*;
@@ -86,7 +87,8 @@ public class PortfolioInterface extends Pane
 		{
 			setActive(false);
 			setActionBar(false,0);
-			PortfolioModify portfolioModify=new PortfolioModify(this,0);
+			int portfolioId=Integer.valueOf(Utility.getSelectedRowColumn(tvPortfolio,0));
+			PortfolioModify portfolioModify=new PortfolioModify(this, portfolioId);
 			additionalOptions.getChildren().add(portfolioModify);
 		});
 		getChildren().add(additionalOptions);

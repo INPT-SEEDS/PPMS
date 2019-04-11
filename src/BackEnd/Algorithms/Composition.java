@@ -21,7 +21,7 @@ public class Composition
 	public void AddProject(Project project)
 	{
 		composition.add(project);
-		value+=project.getValue();
+		value+=project.getTotalValue();
 	}
 
 	public List<Project> getProjects()

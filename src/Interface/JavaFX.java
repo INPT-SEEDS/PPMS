@@ -85,7 +85,7 @@ public class JavaFX
 			button.setMinSize(width*scalex, height*scaley);
 			button.setMaxSize(width*scalex, height*scaley);
 		}
-
+		button.setFocusTraversable(false);
 		return button;
 	}
 

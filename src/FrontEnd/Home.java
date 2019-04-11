@@ -43,6 +43,7 @@ public class Home  extends Application
 
     private Pane Content;
 
+    private Button evaluation,planification,monitoring;
     private Button portfolio, project, user, resource,criterion;
 
 	public static void main(String[] args)
@@ -77,14 +78,19 @@ public class Home  extends Application
 		Pane titleBar=new Pane();
 		titleBar.setLayoutX(0);
 		titleBar.setLayoutY(0);
-		titleBar.setPrefSize(screenWidth, screenHeight/35);
+		titleBar.setPrefSize(screenWidth, screenHeight/20);
 		titleBar.setBackground(new Background(new BackgroundFill(grey, CornerRadii.EMPTY, Insets.EMPTY)));
 		
-		titleBar.getChildren().add(JavaFX.NewLabel("Project Portfolio Management System",white,1, 22,10, 1));
-		
-		Button close=JavaFX.NewButton("X", lightBlue, 16, 1870,0, 50, 30);
-		Button minimize=JavaFX.NewButton("─", lightGrey, 16, 1820,0, 50, 30);
+		titleBar.getChildren().add(JavaFX.NewLabel("     Project Portfolio \nManagement System",white,1, 18,2, 2));
 
+		evaluation=	JavaFX.NewButton("Evaluation", lightBlue, 21, 192, 0, 192, 54);
+		planification=	JavaFX.NewButton("Planification", darkBlue, 21, 2*192, 0, 192, 54);
+		monitoring=		JavaFX.NewButton("Monitoring", darkBlue, 21, 3*192, 0, 192, 54);
+
+		Button close=JavaFX.NewButton("X", lightBlue, 20, 1860,0, 60, 54);
+		Button minimize=JavaFX.NewButton("─", lightGrey, 20, 1800,0, 60, 54);
+
+		titleBar.getChildren().addAll(evaluation,planification,monitoring);
 		titleBar.getChildren().add(close);
 		titleBar.getChildren().add(minimize);
 
@@ -96,8 +102,8 @@ public class Home  extends Application
 		//------------------------------------------Tabs----------------------------------------------------------------
 		Pane tabsBar=new Pane();
 		tabsBar.setLayoutX(0);
-		tabsBar.setLayoutY(screenHeight/35);
-		tabsBar.setPrefSize(screenWidth/10, screenHeight*34/35);
+		tabsBar.setLayoutY(screenHeight/20);
+		tabsBar.setPrefSize(screenWidth/10, screenHeight*19/20);
 		tabsBar.setBackground(new Background(new BackgroundFill(darkerBlue, CornerRadii.EMPTY, Insets.EMPTY)));
 
 		Image portfolioIcon = new Image("file:res/icon/portfolio/portfolio.png");
