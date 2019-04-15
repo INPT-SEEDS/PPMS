@@ -3,8 +3,8 @@ package FrontEnd.Portfolio;
 import BackEnd.Algorithms.Composition;
 import BackEnd.Algorithms.Priorisation;
 import BackEnd.Algorithms.Simple;
+import BackEnd.Portfolio.PortfolioQueries;
 import BackEnd.Project.Project;
-import BackEnd.Project.ProjectQueries;
 import BackEnd.ProjectStatue.ProjectStatue;
 import BackEnd.ProjectStatue.ProjectStatueQueries;
 import FrontEnd.Home;
@@ -59,7 +59,7 @@ public class PortfolioTreat extends ScrollPane
         Content.getChildren().add(cardPane);
 
         //-Criteria-----------------------------------------------------------------------------------------------------------------------------
-        List<Project> projectsList= ProjectQueries.getProjectsByPortfolio(idPortfolio);
+        List<Project> projectsList= PortfolioQueries.getProjectsByPortfolio(idPortfolio);
         List<ProjectStatue> projectStatueList= ProjectStatueQueries.getProjectStatue();
 
 
@@ -102,21 +102,10 @@ public class PortfolioTreat extends ScrollPane
             {
                 cardPane.getChildren().clear();
 
-                /*double[][] matrix= new double[projectsList.size()][1];
-                int index=0;
-                for(Project project:projectsList)
-                {
-                    project.initProjectEvaluation();
-                    matrix[index]=project.getCtriteriaValues();
-                    index++;
-                }
-                double[] values= Priorisation.algorithme(matrix,11);*/
                 Priorisation.algorithme(projectsList);
                 int index=0;
                 for(Project project:projectsList)
                 {
-                    /*float value= (float) ((int)(1000*values[index]))/1000;
-                    project.setTotalValue(value);*/
                     cardPane.getChildren().add(JavaFX.NewLabel(project.getLabel(),1,18,50,y+3));
                     Button projectValue=JavaFX.NewButton(String.valueOf(project.getTotalValue()),lightOrange,18,375,y,100,40);
                     cardPane.getChildren().add((projectValue));
@@ -132,7 +121,7 @@ public class PortfolioTreat extends ScrollPane
             else if(stage==1)
             {
                 cardPane.getChildren().clear();
-
+                //Home.setSelectedPhase(1);
                 Composition[] compositions=Simple.simple(idPortfolio,projectsList);
                 int y=60;
                 for(Composition c:compositions)
@@ -152,6 +141,7 @@ public class PortfolioTreat extends ScrollPane
                 treat.setLayoutY(y-45);
                 cancel.setLayoutY(y-45);
                 treat.setText("Terminer");
+
                 stage=2;
             }
             else if(stage==2)

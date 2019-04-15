@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="PPMS:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/PPMS_jar</output-path>
+    <root id="archive" name="PPMS.jar">
+      <element id="module-output" name="PPMS" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/res/lib/mysql-connector-java-8.0.15.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/res/lib/sqlite-jdbc-3.23.1.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

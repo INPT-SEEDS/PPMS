@@ -1,5 +1,6 @@
 package BackEnd.Portfolio;
 
+import BackEnd.Project.Project;
 import BackEnd.Queries;
 
 import java.sql.ResultSet;
@@ -59,5 +60,26 @@ public class PortfolioQueries
         {e.printStackTrace();}
 
         return portfoliosRef;
+    }
+
+    public static List<Project> getProjectsByPortfolio(int idPort)
+    {
+        List<Project> projects=new ArrayList<>();
+        ResultSet rs=Queries.getResultSetAdvanced("projet","*","where idPortfeuille="+idPort+" order by id");
+        try
+        {
+            while(rs.next())
+            {
+                int id=rs.getInt(1);
+                String label=rs.getString(2);
+                int idPortfolio=rs.getInt(3);
+                int idType=rs.getInt(4);
+                projects.add(new Project(id,label,idPortfolio,idType));
+            }
+        }
+        catch (SQLException e)
+        {e.printStackTrace();}
+
+        return projects;
     }
 }

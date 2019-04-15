@@ -1,12 +1,16 @@
 package FrontEnd.Portfolio;
 
 import BackEnd.Criterion.CriterionQueries;
+import BackEnd.Evaluate.EvaluateQueries;
 import BackEnd.Portfolio.Portfolio;
 import BackEnd.Portfolio.PortfolioQueries;
 import BackEnd.PortfolioCriteria.PortfolioCriteria;
 import BackEnd.PortfolioCriteria.PortfolioCriteriaQueries;
-import BackEnd.Resource.AssignedResource;
+import BackEnd.Project.Project;
+import BackEnd.ProjectStatue.ProjectStatueQueries;
 import BackEnd.ResToPortfolio.ResToPortfolioQueries;
+import BackEnd.Resource.AssignedResource;
+import BackEnd.Utility;
 import FrontEnd.Home;
 import Interface.JavaFX;
 import javafx.scene.control.Button;
@@ -136,16 +140,45 @@ public class PortfolioModify extends Pane
             }
 
             int index=0;
+            boolean didReset=false;//To not reset the projects statues many times ( to not fill database and for better performance)
             for(CheckBox cb:criteriaBox)
             {
+                boolean wasPresent=false;//if this criterion was already present in the portfolio
+                List<Project> projects=PortfolioQueries.getProjectsByPortfolio(idPortfolio);
+
+                for(PortfolioCriteria criterion:criteriaList)
+                {
+                    if(index==criterion.getId())
+                    {
+                        wasPresent=true;
+                    }
+                }
                 if(cb.isSelected())
                 {
-                    String date=new Timestamp(60*1000*(System.currentTimeMillis()/(1000*60))).toString();
+                    if(!wasPresent && !didReset)
+                    {
+                        for(Project project:projects)
+                        {
+                            ProjectStatueQueries.addToDatabase(project.getId(),"Non Evalué",0,Utility.getDatetime());
+                        }
+                        didReset=true;
+                    }
                     int weight=Integer.valueOf(weightsList[index].getText());
-                    PortfolioCriteriaQueries.addToDatabase(index,idPortfolio,weight,date.substring(0,date.length()-5),"null");
+                    PortfolioCriteriaQueries.addToDatabase(index,idPortfolio,weight, Utility.getDatetime(),"null");
+                }
+                else
+                {
+                    if(wasPresent)
+                    {
+                        for(Project project:projects)
+                        {
+                            EvaluateQueries.deleteCriterionEvaluation(project.getId(),index);
+                        }
+                    }
                 }
                 index++;
             }
+
             ResToPortfolioQueries.resetTable(idPortfolio);
             for(ResourcePane rp:resourcePaneList)
             {

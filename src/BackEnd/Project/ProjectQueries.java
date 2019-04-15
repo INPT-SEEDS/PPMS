@@ -1,6 +1,10 @@
 package BackEnd.Project;
 
+import BackEnd.Evaluate.EvaluateQueries;
+import BackEnd.ProjectStatue.ProjectStatueQueries;
 import BackEnd.Queries;
+import BackEnd.ResToProject.ResToProjectQueries;
+import BackEnd.Utility;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -39,27 +43,6 @@ public class ProjectQueries
         return null;
     }
 
-    public static List<Project> getProjectsByPortfolio(int idPort)
-    {
-        List<Project> projects=new ArrayList<>();
-        ResultSet rs=Queries.getResultSetAdvanced("projet","*","where idPortfeuille="+idPort+" order by id");
-        try
-        {
-            while(rs.next())
-            {
-                int id=rs.getInt(1);
-                String label=rs.getString(2);
-                int idPortfolio=rs.getInt(3);
-                int idType=rs.getInt(4);
-                projects.add(new Project(id,label,idPortfolio,idType));
-            }
-        }
-        catch (SQLException e)
-        {e.printStackTrace();}
-
-        return projects;
-    }
-
     public static void updateProject(int id,String label,int idPortfolio,int idType)
     {
         Queries.modifyCell("projet","libelle",label,"id="+id);
@@ -83,5 +66,12 @@ public class ProjectQueries
         {e.printStackTrace();}
 
         return projectsRef;
+    }
+
+    public static void resetProject(int idProject)
+    {
+        ResToProjectQueries.resetTable(idProject);
+        EvaluateQueries.resetEvaluation(idProject);
+        ProjectStatueQueries.addToDatabase(idProject,"Non Evalué",0, Utility.getDatetime());
     }
 }

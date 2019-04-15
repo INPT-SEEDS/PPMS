@@ -19,7 +19,7 @@ public class Project
 
 	private List<AssignedResource> resourceRequired;
 	
-	Project(int id,String label,int idPortfolio,int idType)
+	public Project(int id,String label,int idPortfolio,int idType)
 	{
 		this.id=id;
 		this.label=label;
@@ -104,5 +104,10 @@ public class Project
 	public String getLabel()
 	{
 		return label;
+	}
+
+	public void reset()
+	{
+		ProjectQueries.resetProject(id);
 	}
 }

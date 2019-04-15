@@ -15,6 +15,7 @@ import javafx.scene.paint.Paint;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static BackEnd.Utility.getDatetime;
 
@@ -85,21 +86,32 @@ public class ProjectModify extends Pane
             int idType=typeBox.getSelectionModel().getSelectedIndex();
             if(!label.equals(project.getLabel()) || idType!=project.getIdType() || idPor!=project.getIdPortfolio())
             {
-                /*if(idPor!=project.getIdPortfolio())
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Attention");
+                alert.setContentText("Voulez-vous enregistrer ces modifications ?");
+                alert.setHeaderText(null);
+                if(idPor!=project.getIdPortfolio())
                 {
-                    Alert alert = new Alert(Alert.AlertType.WARNING);
-                    alert.setTitle("Warning Dialog");
-                    alert.setHeaderText("Look, a Warning Dialog");
-                    alert.setContentText("Careful with the next step!");
-                    alert.showAndWait();
-                }*/
-                ProjectQueries.updateProject(idProject,label,idPor,idType);
+                    alert.setContentText("Changer le portefeuille réinitialisera tout les évaluations du projet, Voulez-vous enregistrer ces modifications ?");
+                }
+                Optional<ButtonType> result = alert.showAndWait();
+                if (ButtonType.OK == result.get())
+                {
+                    ProjectQueries.resetProject(idProject);
+                    ProjectQueries.updateProject(idProject,label,idPor,idType);
+                    System.out.println("changed");
+                }
+                else
+                {
+                    parent.resetSelection();
+                    getChildren().clear();
+                    this.setStyle("-fx-background-color: #f3f3f3;");
+                }
             }
 
             ResToProjectQueries.resetTable(idProject);
             for(ResourcePane rp:resourcePaneList)
             {
-
                 ResToProjectQueries.addToDatabase(idProject,rp.getIdResource(),getDatetime(),rp.getQuantity());
             }
             parent.refreshTable();

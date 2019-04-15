@@ -8,13 +8,14 @@ import java.util.List;
 
 public class Composition
 {
-	private boolean ReqSatisfied=true;
+	private boolean ReqSatisfied;
 	private float value=0;
 	
 	private List<Project> composition;
 	
 	public Composition()
 	{
+		ReqSatisfied=true;
 		composition=new ArrayList<Project>();
 	}
 
@@ -69,5 +70,50 @@ public class Composition
 		{
 			System.out.print(project.getLabel()+" ");
 		}
+	}
+
+	public String GetCompositionString(int i)
+	{
+		String CompositionString = "";
+		for (Project project : composition)
+		{
+			CompositionString = CompositionString + project.getLabel() + " ";
+		}
+
+		String Test = CompositionString;
+
+		CompositionString = CompositionString + " (";
+
+		for (int j = 1; j < i; j++) {
+			String a = String.valueOf(j);
+
+			if (j == i - 1)
+			{
+				if (Test.contains(a))
+				{
+					CompositionString = CompositionString + " 1";
+
+				}
+				else
+				{
+					CompositionString = CompositionString + " 0";
+				}
+
+			}
+			else if (Test.contains(a))
+			{
+				CompositionString = CompositionString + " 1,";
+			}
+			else
+			{
+				CompositionString = CompositionString + " 0,";
+			}
+		}
+
+		CompositionString = CompositionString + ")";
+
+
+
+		return CompositionString;
 	}
 }

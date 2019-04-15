@@ -53,6 +53,11 @@ public class EvaluateQueries
         return maxId;
     }
 
+    public static void deleteCriterionEvaluation(int idProject,int idCriterion)
+    {
+        Queries.deleteRow("evaluer","idProjet="+idProject+" AND idCritere="+idCriterion);
+    }
+
     public static void resetEvaluation(int idProject)
     {
         Queries.deleteRow("evaluer","idProjet="+idProject);

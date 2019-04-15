@@ -41,9 +41,9 @@ public class Home  extends Application
 	private Paint lightBlue=Paint.valueOf("5096be");
 	private Paint darkBlue=Paint.valueOf("233F4E");
 
-    private Pane Content;
+    private static Pane Content;
 
-    private Button evaluation,planification,monitoring;
+    private static Button evaluation,planification,monitoring;
     private Button portfolio, project, user, resource,criterion;
 
 	public static void main(String[] args)
@@ -191,4 +191,25 @@ public class Home  extends Application
 
 		}
     }
+
+	public static void setSelectedPhase(int index)
+	{
+		Content.getChildren().clear();
+		evaluation.setStyle("-fx-base: #202C33;");
+		planification.setStyle("-fx-base: #202C33;");
+		monitoring.setStyle("-fx-base: #202C33;");
+
+		switch(index)
+		{
+			case 0:
+				evaluation.setStyle("-fx-base: #5096be;");
+				break;
+			case 1:
+				planification.setStyle("-fx-base: #5096be;");
+				break;
+			case 2:
+				monitoring.setStyle("-fx-base: #5096be;");
+				break;
+		}
+	}
 }
