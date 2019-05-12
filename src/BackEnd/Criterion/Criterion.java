@@ -27,9 +27,20 @@ public class Criterion
         return ref;
     }
 
+    public String getLabel()
+    {
+        return label;
+    }
+
     public String getGenre()
     {
         return genre;
     }
+
+    public int getIdType()
+    {
+        return idType;
+    }
 }
+
 

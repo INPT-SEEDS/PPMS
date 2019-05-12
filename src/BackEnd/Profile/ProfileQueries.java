@@ -34,6 +34,21 @@ public class ProfileQueries
         return null;
     }
 
+    public static List<Integer> getPrivilegesById(int id)
+    {
+        List<Integer> privileges=new ArrayList<>();
+        ResultSet rs=Queries.getResultSetWhere("profileprivilege","*","idProfile="+id);
+        try
+        {
+            while(rs.next())
+            {
+                privileges.add(rs.getInt(2));
+            }
+        }
+        catch (SQLException e) { e.printStackTrace(); }
+        return privileges;
+    }
+
     public static ResultSet getResultSet()
     {
         return Queries.getResultSet("profile");
@@ -70,6 +85,15 @@ public class ProfileQueries
         }
         catch (SQLException e) { e.printStackTrace(); }
         return profileRefList;
+    }
+
+    public static void updatePrivileges(int id, List<Integer> privileges)
+    {
+        Queries.deleteRow("profileprivilege","idProfile="+id);
+        for(int privilege:privileges)
+        {
+            Queries.insertInto("profileprivilege",id+","+privilege);
+        }
     }
 
 }

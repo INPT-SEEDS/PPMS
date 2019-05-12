@@ -2,8 +2,11 @@ package FrontEnd.Resource;
 
 import BackEnd.Resource.ResourceQueries;
 import BackEnd.ResourceCategory.ResourceCategoryQueries;
-import FrontEnd.Home;
+import BackEnd.User.User;
+import FrontEnd.Login;
 import Interface.JavaFX;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
@@ -14,23 +17,26 @@ import java.util.List;
 
 public class ResourceInterface extends Pane
 {
-    static double scalex = Home.scalex;
-    static double scaley = Home.scaley;
+    static double scalex = Login.scalex;
+    static double scaley = Login.scaley;
 
     boolean editing;
 
     private Paint black=Paint.valueOf("000000");
     private Paint red=Paint.valueOf("F04040");
-    private Paint lightBlue=Paint.valueOf("5096be");
+    private Paint lightBlue=Paint.valueOf("11BAF8");
     private Paint lightGreen=Paint.valueOf("50be96");
     private Paint lightOrange=Paint.valueOf("F77D50");
 
     private Button add,bar,assignToPortfolio,assignToProject,modify;
     private Button add2,bar2,modify2;
+
+    private ComboBox idCatField;
+
     private TableView tvResource,tvCategory;
 
     @SuppressWarnings({ "unchecked","rawtypes" })
-    public ResourceInterface(double x,double y)
+    public ResourceInterface(User user,double x, double y)
     {
         this.setLayoutX(x*scalex);
         this.setLayoutY(y*scaley);
@@ -105,7 +111,11 @@ public class ResourceInterface extends Pane
             {
                 setActionBar(false);
                 setActive(false);
-                ResourceModify resourceModify=new ResourceModify(this,0);
+
+                Object row=tvResource.getSelectionModel().getSelectedItems().get(0);
+                int resId = Integer.valueOf(row.toString().split(",")[0].substring(1));
+
+                ResourceModify resourceModify=new ResourceModify(this,resId);
                 additionalOptions.getChildren().add(resourceModify);
             }
         });
@@ -117,16 +127,16 @@ public class ResourceInterface extends Pane
         Pane addPane=new Pane();
         List<String> Categories= ResourceCategoryQueries.getCategoriesRef();
         TextField idField=JavaFX.NewTextField(18,333,100,482);
-        idField.setText(String.valueOf(tvResource.getItems().size()));
         idField.setEditable(false);
         TextField libField=JavaFX.NewTextField(18,333,433,482);
-        ComboBox idCatField=JavaFX.NewComboBox(Categories,333,766,482);
+        idCatField=JavaFX.NewComboBox(Categories,333,766,482);
         Button confirm=JavaFX.NewButton("Confirmer",lightGreen,18,1110,482);
         Button cancel=JavaFX.NewButton("Annuler",red,18,1230,482);
         Button addBar=JavaFX.NewButton("",black,2, 93, 493,1200,10);
 
         add.addEventFilter(MouseEvent.MOUSE_PRESSED, mouseEvent ->
         {
+            idField.setText(String.valueOf(tvResource.getItems().size()));
             setActive(false);
             addPane.getChildren().addAll(addBar,idField,idCatField,libField,confirm,cancel);
             setActionBar(false);
@@ -140,11 +150,23 @@ public class ResourceInterface extends Pane
             int id=Integer.valueOf(idField.getText());
             String label=libField.getText();
             int idCat=idCatField.getSelectionModel().getSelectedIndex();
-            ResourceQueries.addToDatabase(id,label,idCat);
-            refreshTable();
-            idField.setText("");libField.setText("");
-            addPane.getChildren().clear();
-            setActive(true);
+            if(label.length()>0)
+            {
+                ResourceQueries.addToDatabase(id,label,idCat);
+                refreshTable();
+                idField.setText("");libField.setText("");
+                addPane.getChildren().clear();
+                setActive(true);
+            }
+            else
+            {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Erreur");
+                alert.setHeaderText(null);
+                alert.setContentText("Veuillez remplir tous les champs");
+                alert.showAndWait();
+            }
+
         });
 
         cancel.addEventFilter(MouseEvent.MOUSE_PRESSED, mouseEvent->
@@ -173,7 +195,11 @@ public class ResourceInterface extends Pane
             setActionBar(false);
             setActionBar2(false);
             setActive(false);
-            CategoryModify categoryModify=new CategoryModify(this,0);
+
+            Object row=tvCategory.getSelectionModel().getSelectedItems().get(0);
+            int catId = Integer.valueOf(row.toString().split(",")[0].substring(1));
+
+            CategoryModify categoryModify=new CategoryModify(this,catId);
             additionalOptions2.getChildren().add(categoryModify);
         });
         getChildren().add(additionalOptions2);
@@ -203,7 +229,6 @@ public class ResourceInterface extends Pane
         Pane addPane2=new Pane();
 
         TextField id2Field=JavaFX.NewTextField(18,333,100,950);
-        id2Field.setText(String.valueOf(tvCategory.getItems().size()));
         id2Field.setEditable(false);
         TextField ref2Field=JavaFX.NewTextField(18,333,433,950);
         TextField lib2Field=JavaFX.NewTextField(18,333,766,950);
@@ -213,6 +238,7 @@ public class ResourceInterface extends Pane
 
         add2.addEventFilter(MouseEvent.MOUSE_PRESSED, mouseEvent ->
         {
+            id2Field.setText(String.valueOf(tvCategory.getItems().size()));
             setActive(false);
             addPane2.getChildren().addAll(addBar2,id2Field,ref2Field,lib2Field,confirm2,cancel2);
             setActionBar(false);
@@ -226,13 +252,22 @@ public class ResourceInterface extends Pane
             int id=Integer.valueOf(id2Field.getText());
             String ref=ref2Field.getText();
             String label=lib2Field.getText();
-            ResourceCategoryQueries.addToDatabase(id,ref,label);
-            refreshTable2();
-            idCatField.getItems().add(ref);
-            idCatField.getSelectionModel().select(0);
-            id2Field.setText("");ref2Field.setText("");lib2Field.setText("");
-            addPane2.getChildren().clear();
-            setActive(true);
+            if(ref.length()>0 && label.length()>0)
+            {
+                ResourceCategoryQueries.addToDatabase(id,ref,label);
+                refreshTable2();
+                id2Field.setText("");ref2Field.setText("");lib2Field.setText("");
+                addPane2.getChildren().clear();
+                setActive(true);
+            }
+            else
+            {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Erreur");
+                alert.setHeaderText(null);
+                alert.setContentText("Veuillez remplir tous les champs");
+                alert.showAndWait();
+            }
         });
 
         cancel2.addEventFilter(MouseEvent.MOUSE_PRESSED, mouseEvent->
@@ -280,6 +315,9 @@ public class ResourceInterface extends Pane
     }
     public void refreshTable2()
     {
+        ObservableList<String> observableList= FXCollections.observableArrayList(ResourceCategoryQueries.getCategoriesRef());
+        idCatField.setItems(observableList);
+        idCatField.getSelectionModel().selectFirst();
         JavaFX.updateTable(tvCategory, ResourceCategoryQueries.getResultSet());
     }
 }

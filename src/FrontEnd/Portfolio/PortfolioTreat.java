@@ -7,7 +7,7 @@ import BackEnd.Portfolio.PortfolioQueries;
 import BackEnd.Project.Project;
 import BackEnd.ProjectStatue.ProjectStatue;
 import BackEnd.ProjectStatue.ProjectStatueQueries;
-import FrontEnd.Home;
+import FrontEnd.Login;
 import Interface.JavaFX;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -21,8 +21,8 @@ import java.util.List;
 
 public class PortfolioTreat extends ScrollPane
 {
-    static double scalex = Home.scalex;
-    static double scaley = Home.scaley;
+    static double scalex = Login.scalex;
+    static double scaley = Login.scaley;
 
     private int stage;
     private int y;
@@ -121,7 +121,6 @@ public class PortfolioTreat extends ScrollPane
             else if(stage==1)
             {
                 cardPane.getChildren().clear();
-                //Home.setSelectedPhase(1);
                 Composition[] compositions=Simple.simple(idPortfolio,projectsList);
                 int y=60;
                 for(Composition c:compositions)

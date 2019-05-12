@@ -1,34 +1,43 @@
 package FrontEnd.User;
 
 import BackEnd.Profile.ProfileQueries;
+import BackEnd.User.User;
 import BackEnd.User.UserQueries;
-import FrontEnd.Home;
+import FrontEnd.Login;
 import Interface.JavaFX;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Paint;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 public class UserInterface extends Pane
 {
-	static double scalex = Home.scalex;
-	static double scaley = Home.scaley;
+	static double scalex = Login.scalex;
+	static double scaley = Login.scaley;
 
 	private Paint black=Paint.valueOf("000000");
 	private Paint red=Paint.valueOf("F04040");
-	private Paint lightBlue=Paint.valueOf("5096be");
+	private Paint lightBlue=Paint.valueOf("11BAF8");
 	private Paint lightGreen=Paint.valueOf("50be96");
 
 	private Button add,bar,modify,disable;
 	private Button add2,bar2,modify2;
 
+	private ComboBox idProField;
+
 	private TableView tvUser,tvProfile;
 
 	@SuppressWarnings({ "unchecked","rawtypes" })
-	public UserInterface(double x,double y)
+	public UserInterface(User user,double x, double y)
 	{
 		this.setLayoutX(x*scalex);
 		this.setLayoutY(y*scaley);
@@ -73,7 +82,9 @@ public class UserInterface extends Pane
 			setActionBar(false);
 			setActionBar2(false);
 			setActive(false);
-			UserModify userModify=new UserModify(this,0);
+			Object row=tvUser.getSelectionModel().getSelectedItems().get(0);
+			int id = Integer.valueOf(row.toString().split(",")[0].substring(1));
+			UserModify userModify=new UserModify(this,id);
 			additionalOptions.getChildren().add(userModify);
 		});
 		getChildren().add(tvUser);
@@ -90,7 +101,18 @@ public class UserInterface extends Pane
 		TextField fsField=JavaFX.NewTextField(18,167,433,482);
 		TextField lsField=JavaFX.NewTextField(18,167,600,482);
 		TextField phField=JavaFX.NewTextField(18,167,767,482);
-		ComboBox idProField=JavaFX.NewComboBox(Profiles,167,934,482);
+		phField.textProperty().addListener(new ChangeListener<String>()
+		{
+			@Override
+			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue)
+			{
+				if (!newValue.matches("\\d*"))
+				{
+					phField.setText(newValue.replaceAll("[^\\d]", ""));
+				}
+			}
+		});
+		idProField=JavaFX.NewComboBox(Profiles,167,934,482);
 		idField.setText(String.valueOf(tvUser.getItems().size()));
 		idField.setEditable(false);
 		Button confirm=JavaFX.NewButton("Confirmer",lightGreen,18,1110,482);
@@ -109,16 +131,57 @@ public class UserInterface extends Pane
 
 		confirm.addEventFilter(MouseEvent.MOUSE_PRESSED, mouseEvent->
 		{
+			boolean correct=true;
 			int id=Integer.valueOf(idField.getText());
 			String username=usrField.getText();
 			String firstname=fsField.getText();
 			String lastname=lsField.getText();
-			String phone=phField.getText();
-			int idProfile=idProField.getSelectionModel().getSelectedIndex();
-			UserQueries.addToDatabase(id,username,firstname,lastname,phone,idProfile);
-			refreshTable();
-			addPane.getChildren().clear();
-			setActive(true);
+
+			if(username.length()>0 && firstname.length()>0 && lastname.length()>0)
+			{
+				ResultSet rs=UserQueries.getResultSet();
+				try
+				{
+					while(rs.next())
+					{
+						String usr=rs.getString(2);
+						if(username.equals(usr))
+						{
+							correct=false;
+						}
+					}
+				}
+				catch(SQLException e)
+				{
+					e.printStackTrace();
+				}
+
+				String phone=phField.getText();
+				int idProfile=idProField.getSelectionModel().getSelectedIndex();
+				if(correct)
+				{
+					UserQueries.addToDatabase(id,username,firstname,lastname,phone,idProfile);
+					refreshTable();
+					addPane.getChildren().clear();
+					setActive(true);
+				}
+				else
+				{
+					Alert alert = new Alert(Alert.AlertType.ERROR);
+					alert.setTitle("Erreur");
+					alert.setHeaderText(null);
+					alert.setContentText("Ce nom d'utilisateur existe déjà");
+					alert.showAndWait();
+				}
+			}
+			else
+			{
+				Alert alert = new Alert(Alert.AlertType.ERROR);
+				alert.setTitle("Erreur");
+				alert.setHeaderText(null);
+				alert.setContentText("Veuillez remplir tous les champs");
+				alert.showAndWait();
+			}
 		});
 
 		cancel.addEventFilter(MouseEvent.MOUSE_PRESSED, mouseEvent->
@@ -147,7 +210,9 @@ public class UserInterface extends Pane
 			setActionBar(false);
 			setActionBar2(false);
 			setActive(false);
-			ProfileModify profileModify=new ProfileModify(this,0);
+			Object row=tvProfile.getSelectionModel().getSelectedItems().get(0);
+			int id = Integer.valueOf(row.toString().split(",")[0].substring(1));
+			ProfileModify profileModify=new ProfileModify(this,id);
 			additionalOptions2.getChildren().add(profileModify);
 		});
 		getChildren().add(additionalOptions2);
@@ -176,7 +241,6 @@ public class UserInterface extends Pane
 		Pane addPane2=new Pane();
 
 		TextField id2Field=JavaFX.NewTextField(18,333,100,950);
-		id2Field.setText(String.valueOf(tvProfile.getItems().size()));
 		id2Field.setEditable(false);
 		TextField ref2Field=JavaFX.NewTextField(18,333,433,950);
 		TextField lib2Field=JavaFX.NewTextField(18,333,766,950);
@@ -186,6 +250,7 @@ public class UserInterface extends Pane
 
 		add2.addEventFilter(MouseEvent.MOUSE_PRESSED, mouseEvent ->
 		{
+			id2Field.setText(String.valueOf(tvProfile.getItems().size()));
 			setActionBar(false);
 			setActionBar2(false);
 			setActive(false);
@@ -199,12 +264,22 @@ public class UserInterface extends Pane
 			int id=Integer.valueOf(id2Field.getText());
 			String ref=ref2Field.getText();
 			String label=lib2Field.getText();
-			ProfileQueries.addToDatabase(id,ref,label);
-			refreshTable2();
-			idProField.getItems().add(ref);
-			idProField.getSelectionModel().select(0);
-			addPane2.getChildren().clear();
-			setActive(true);
+			if(ref.length()>0 && label.length()>0)
+			{
+				ProfileQueries.addToDatabase(id,ref,label);
+				refreshTable2();
+				ref2Field.setText("");lib2Field.setText("");
+				addPane2.getChildren().clear();
+				setActive(true);
+			}
+			else
+			{
+				Alert alert = new Alert(Alert.AlertType.ERROR);
+				alert.setTitle("Erreur");
+				alert.setHeaderText(null);
+				alert.setContentText("Veuillez remplir tous les champs");
+				alert.showAndWait();
+			}
 		});
 
 		cancel2.addEventFilter(MouseEvent.MOUSE_PRESSED, mouseEvent->
@@ -250,6 +325,9 @@ public class UserInterface extends Pane
 	}
 	public void refreshTable2()
 	{
+		ObservableList<String> observableList= FXCollections.observableArrayList(ProfileQueries.getProfilesRef());
+		idProField.setItems(observableList);
+		idProField.getSelectionModel().selectFirst();
 		JavaFX.updateTable( tvProfile,ProfileQueries.getResultSet());
 	}
 }

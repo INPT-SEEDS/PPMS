@@ -1,14 +1,18 @@
 package BackEnd;
 
-import FrontEnd.Home;
+import FrontEnd.Login;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 public class Queries
 {
     public static Connection connect()
     {
-        return Home.getConnection();
+        Connection con= Login.getConnection();
+        return con;
     }
 
     public static ResultSet getResultSet(String table)

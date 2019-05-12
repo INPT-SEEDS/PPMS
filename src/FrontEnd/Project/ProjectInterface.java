@@ -4,8 +4,11 @@ import BackEnd.Portfolio.PortfolioQueries;
 import BackEnd.Project.ProjectQueries;
 import BackEnd.ProjectStatue.ProjectStatueQueries;
 import BackEnd.ProjectType.ProjectTypeQueries;
-import FrontEnd.Home;
+import BackEnd.User.User;
+import FrontEnd.Login;
 import Interface.JavaFX;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
@@ -18,13 +21,13 @@ import static BackEnd.Utility.getDatetime;
 
 public class ProjectInterface extends Pane
 {
-	static double scalex = Home.scalex;
-	static double scaley = Home.scaley;
+	static double scalex = Login.scalex;
+	static double scaley = Login.scaley;
 
 	private Paint black=Paint.valueOf("000000");
 	private Paint red=Paint.valueOf("F04040");
 	private Paint lightOrange=Paint.valueOf("F77D50");
-	private Paint lightBlue=Paint.valueOf("5096be");
+	private Paint lightBlue=Paint.valueOf("11BAF8");
 	private Paint lightGreen=Paint.valueOf("50be96");
 
 	private Button bar,modify,evaluate;
@@ -35,7 +38,7 @@ public class ProjectInterface extends Pane
 	private ComboBox typeField ,porField;
 
 	@SuppressWarnings({ "unchecked","rawtypes" })
-	public ProjectInterface(double x,double y)
+	public ProjectInterface(User user, double x, double y)
 	{
 		this.setLayoutX(x*scalex);
 		this.setLayoutY(y*scaley);
@@ -81,7 +84,7 @@ public class ProjectInterface extends Pane
 			Object row=tvProject.getSelectionModel().getSelectedItems().get(0);
 			int idProject = Integer.valueOf(row.toString().split(",")[0].substring(1));
 			int idPortfolio = Integer.valueOf(row.toString().split(",")[2].substring(1));
-			ProjectEvaluate projectEvaluate =new ProjectEvaluate(this,idProject,idPortfolio);
+			ProjectEvaluate projectEvaluate =new ProjectEvaluate(this,idProject,idPortfolio,user.getId());
 			additionalOptions.getChildren().add(projectEvaluate);
 		});
 
@@ -140,12 +143,23 @@ public class ProjectInterface extends Pane
 			String ref=refField.getText();
 			int porId=porField.getSelectionModel().getSelectedIndex();
 			int typeId=typeField.getSelectionModel().getSelectedIndex();
-			ProjectQueries.addToDatabase(id,ref,porId,typeId);
-			ProjectStatueQueries.addToDatabase(id,"Non Evalué",0,getDatetime());
-			refField.setText("");
-			refreshTable();
-			addPane.getChildren().clear();
-			setActive(true);
+			if(ref.length()>0)
+			{
+				ProjectQueries.addToDatabase(id,ref,porId,typeId);
+				ProjectStatueQueries.addToDatabase(id,"Non Evalué",0,getDatetime());
+				refField.setText("");
+				refreshTable();
+				addPane.getChildren().clear();
+				setActive(true);
+			}
+			else
+			{
+				Alert alert = new Alert(Alert.AlertType.ERROR);
+				alert.setTitle("Erreur");
+				alert.setHeaderText(null);
+				alert.setContentText("Veuillez remplir tous les champs");
+				alert.showAndWait();
+			}
 		});
 
 		cancel.addEventFilter(MouseEvent.MOUSE_PRESSED, mouseEvent->
@@ -174,7 +188,9 @@ public class ProjectInterface extends Pane
 			setActionBar(false);
 			setActionBar2(false);
 			setActive(false);
-			CategoryModify categoryModify=new CategoryModify(this,0);
+			Object row=tvType.getSelectionModel().getSelectedItems().get(0);
+			int id = Integer.valueOf(row.toString().split(",")[0].substring(1));
+			CategoryModify categoryModify=new CategoryModify(this,id);
 			additionalOptions2.getChildren().add(categoryModify);
 		});
 		getChildren().add(additionalOptions2);
@@ -203,7 +219,6 @@ public class ProjectInterface extends Pane
 		Pane addPane2=new Pane();
 
 		TextField id2Field=JavaFX.NewTextField(18,333,100,950);
-		id2Field.setText(String.valueOf(tvType.getItems().size()));
 		id2Field.setEditable(false);
 		TextField ref2Field=JavaFX.NewTextField(18,333,433,950);
 		TextField lib2Field=JavaFX.NewTextField(18,333,766,950);
@@ -213,6 +228,7 @@ public class ProjectInterface extends Pane
 
 		add2.addEventFilter(MouseEvent.MOUSE_PRESSED, mouseEvent ->
 		{
+			id2Field.setText(String.valueOf(tvType.getItems().size()));
 			setActionBar(false);
 			setActionBar2(false);
 			tvType.getSelectionModel().clearSelection();
@@ -227,14 +243,22 @@ public class ProjectInterface extends Pane
 			int id=Integer.valueOf(id2Field.getText());
 			String ref=ref2Field.getText();
 			String label=lib2Field.getText();
-			ProjectTypeQueries.addToDatabase(id,ref,label);
-			refreshTable2();
-
-			typeField.getItems().add(ref);
-			typeField.getSelectionModel().select(0);
-
-			addPane2.getChildren().clear();
-			setActive(true);
+			if(ref.length()>0 && label.length()>0)
+			{
+				ProjectTypeQueries.addToDatabase(id,ref,label);
+				refreshTable2();
+				id2Field.setText("");ref2Field.setText("");lib2Field.setText("");
+				addPane2.getChildren().clear();
+				setActive(true);
+			}
+			else
+			{
+				Alert alert = new Alert(Alert.AlertType.ERROR);
+				alert.setTitle("Erreur");
+				alert.setHeaderText(null);
+				alert.setContentText("Veuillez remplir tous les champs");
+				alert.showAndWait();
+			}
 		});
 
 		cancel2.addEventFilter(MouseEvent.MOUSE_PRESSED, mouseEvent->
@@ -279,6 +303,9 @@ public class ProjectInterface extends Pane
 	}
 	public void refreshTable2()
 	{
+		ObservableList<String> observableList= FXCollections.observableArrayList(ProjectTypeQueries.getProjectTypesRef());
+		typeField.setItems(observableList);
+		typeField.getSelectionModel().selectFirst();
 		JavaFX.updateTable(tvType,ProjectTypeQueries.getResultSet());
 	}
 }

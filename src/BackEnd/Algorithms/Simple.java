@@ -10,6 +10,8 @@ public class Simple
 {
 	public static Composition[] simple(int idPortfolio,List<Project> projectList)
 	{
+		List<AssignedResource> portfolioResources= ResToPortfolioQueries.getResourceByPortfolio(idPortfolio);
+
 		//-Create-The-Composition-------------------------------------------------------------------------------------------
 		for(Project project:projectList)
 		{
@@ -17,6 +19,8 @@ public class Simple
 		}
 		int projectsCount=projectList.size();
 		int compositionsCount=(int)Math.pow(2, projectsCount)-1;
+		int satisfiedCompositionsCount=compositionsCount;
+
 		Composition[] compositions=new Composition[compositionsCount];	
 		
 		for(int i=1; i<compositionsCount+1; i++)
@@ -27,7 +31,15 @@ public class Simple
 				int power=(int) Math.pow(2,projectsCount-j-1 );
 				if((i/power)%2==1)
 				{
-					compositions[i-1].AddProject(projectList.get(j));
+					compositions[i - 1].AddProject(projectList.get(j));
+					if (projectList.get(j).getResourceRequired().size() > portfolioResources.size())
+					{
+						if(compositions[i-1].AreReqSatisfied())
+						{
+							satisfiedCompositionsCount--;
+						}
+						compositions[i-1].SetReqSatisfied(false);
+					}
 				}
 			}
 		}
@@ -51,8 +63,6 @@ public class Simple
 		}
 
 		//-Filter-The-Composition-------------------------------------------------------------------------------------------
-		List<AssignedResource> portfolioResources= ResToPortfolioQueries.getResourceByPortfolio(idPortfolio);
-		int satisfiedCompositionsCount=compositionsCount;
 
 		for(Composition composition:compositions)
 		{
@@ -66,8 +76,6 @@ public class Simple
 					if(pr!=null)
 					resourceRequired+=pr.getQuantity();
 				}
-
-				System.out.println("	"+resource.getLabel()+" :: "+resourceRequired);
 
 				if(resourceRequired>resource.getQuantity())
 				{

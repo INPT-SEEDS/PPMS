@@ -2,8 +2,11 @@ package FrontEnd.Criterion;
 
 import BackEnd.Criterion.CriterionQueries;
 import BackEnd.CriterionType.CriterionTypeQueries;
-import FrontEnd.Home;
+import BackEnd.User.User;
+import FrontEnd.Login;
 import Interface.JavaFX;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
@@ -14,20 +17,23 @@ import java.util.List;
 
 public class CriterionInterface extends Pane
 {
-    static double scalex = Home.scalex;
-    static double scaley = Home.scaley;
+    static double scalex = Login.scalex;
+    static double scaley = Login.scaley;
 
     private Paint black=Paint.valueOf("000000");
     private Paint red=Paint.valueOf("F04040");
-    private Paint lightBlue=Paint.valueOf("5096be");
+    private Paint lightBlue=Paint.valueOf("11BAF8");
     private Paint lightGreen=Paint.valueOf("50be96");
 
     private Button add,bar,modify;
     private Button add2,bar2,modify2;
+
+    private ComboBox typeField;
+
     private TableView tvCriteria, tvType;
 
     @SuppressWarnings({ "unchecked","rawtypes" })
-    public CriterionInterface(double x,double y)
+    public CriterionInterface(User user,double x, double y)
     {
         this.setLayoutX(x*scalex);
         this.setLayoutY(y*scaley);
@@ -51,7 +57,9 @@ public class CriterionInterface extends Pane
             setActionBar(false);
             setActionBar2(false);
             setActive(false);
-            CriterionModify criterionModify=new CriterionModify(this,0);
+            Object row=tvCriteria.getSelectionModel().getSelectedItems().get(0);
+            int id = Integer.valueOf(row.toString().split(",")[0].substring(1));
+            CriterionModify criterionModify=new CriterionModify(this,id);
             additionalOptions.getChildren().add(criterionModify);
         });
         getChildren().add(additionalOptions);
@@ -82,7 +90,7 @@ public class CriterionInterface extends Pane
         TextField refField=JavaFX.NewTextField(18,200,300,482);
         TextField libField=JavaFX.NewTextField(18,200,500,482);
         ComboBox genreField=JavaFX.NewComboBox(genres,200,700,482);
-        ComboBox typeField=JavaFX.NewComboBox(Types,200,900,482);
+        typeField=JavaFX.NewComboBox(Types,200,900,482);
 
         Button confirm=JavaFX.NewButton("Confirmer",lightGreen,18,1110,482);
         Button cancel=JavaFX.NewButton("Annuler",red,18,1230,482);
@@ -106,11 +114,23 @@ public class CriterionInterface extends Pane
             String label=libField.getText();
             String genre= (String) genreField.getSelectionModel().getSelectedItem();
             int idType=typeField.getSelectionModel().getSelectedIndex();
-            CriterionQueries.addToDatabase(id,ref,label,genre,idType);
-            refreshTable();
-            idField.setText("");libField.setText("");refField.setText("");
-            addPane.getChildren().clear();
-            setActive(true);
+            if(ref.length()>0 && label.length()>0)
+            {
+                CriterionQueries.addToDatabase(id,ref,label,genre,idType);
+                refreshTable();
+                libField.setText("");refField.setText("");
+                addPane.getChildren().clear();
+                setActive(true);
+            }
+
+            else
+            {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Erreur");
+                alert.setHeaderText(null);
+                alert.setContentText("Veuillez remplir tous les champs");
+                alert.showAndWait();
+            }
         });
 
         cancel.addEventFilter(MouseEvent.MOUSE_PRESSED, mouseEvent->
@@ -138,7 +158,9 @@ public class CriterionInterface extends Pane
             setActionBar(false);
             setActionBar2(false);
             setActive(false);
-            TypeModify typeModify=new TypeModify(this,0);
+            Object row=tvType.getSelectionModel().getSelectedItems().get(0);
+            int id = Integer.valueOf(row.toString().split(",")[0].substring(1));
+            TypeModify typeModify=new TypeModify(this,id);
             additionalOptions2.getChildren().add(typeModify);
         });
         getChildren().add(additionalOptions2);
@@ -167,7 +189,6 @@ public class CriterionInterface extends Pane
         Pane addPane2=new Pane();
 
         TextField id2Field=JavaFX.NewTextField(18,333,100,950);
-        id2Field.setText(String.valueOf(tvType.getItems().size()));
         id2Field.setEditable(false);
         TextField ref2Field=JavaFX.NewTextField(18,333,433,950);
         TextField lib2Field=JavaFX.NewTextField(18,333,766,950);
@@ -177,6 +198,7 @@ public class CriterionInterface extends Pane
 
         add2.addEventFilter(MouseEvent.MOUSE_PRESSED, mouseEvent ->
         {
+            id2Field.setText(String.valueOf(tvType.getItems().size()));
             setActive(false);
             addPane2.getChildren().addAll(addBar2,id2Field,ref2Field,lib2Field,confirm2,cancel2);
             setActionBar(false);
@@ -190,14 +212,22 @@ public class CriterionInterface extends Pane
             int id=Integer.valueOf(id2Field.getText());
             String ref=ref2Field.getText();
             String label=lib2Field.getText();
-
-            CriterionTypeQueries.addToDatabase(id,ref,label);
-            refreshTable2();
-            typeField.getItems().add(ref);
-            typeField.getSelectionModel().select(0);
-
-            addPane2.getChildren().clear();
-            setActive(true);
+            if(ref.length()>0 && label.length()>0)
+            {
+                CriterionTypeQueries.addToDatabase(id,ref,label);
+                refreshTable2();
+                id2Field.setText("");ref2Field.setText("");lib2Field.setText("");
+                addPane2.getChildren().clear();
+                setActive(true);
+            }
+            else
+            {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Erreur");
+                alert.setHeaderText(null);
+                alert.setContentText("Veuillez remplir tous les champs");
+                alert.showAndWait();
+            }
         });
 
         cancel2.addEventFilter(MouseEvent.MOUSE_PRESSED, mouseEvent->
@@ -242,6 +272,9 @@ public class CriterionInterface extends Pane
     }
     public void refreshTable2()
     {
+        ObservableList<String> observableList= FXCollections.observableArrayList(CriterionTypeQueries.getCriteriaTypeRef());
+        typeField.setItems(observableList);
+        typeField.getSelectionModel().selectFirst();
         JavaFX.updateTable(tvType,CriterionTypeQueries.getResultSet());
     }
 }

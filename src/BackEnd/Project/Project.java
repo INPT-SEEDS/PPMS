@@ -67,15 +67,11 @@ public class Project
 		return resourceRequired;
 	}
 
-	public void setProjectEvaluation(List<Evaluate> projectEvaluation)
-	{
-		this.projectEvaluation = projectEvaluation;
-	}
-
 	public List<Evaluate> getProjectEvaluation()
 	{
 		return projectEvaluation;
 	}
+
 
 	public double[] getCtriteriaValues()
 	{
@@ -85,6 +81,7 @@ public class Project
 		for(Evaluate e:projectEvaluation)
 		{
 			ret[index]=e.getValue();
+			System.out.println(e.getValue());
 			index++;
 		}
 		return ret;
@@ -104,10 +101,5 @@ public class Project
 	public String getLabel()
 	{
 		return label;
-	}
-
-	public void reset()
-	{
-		ProjectQueries.resetProject(id);
 	}
 }

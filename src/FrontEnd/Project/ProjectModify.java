@@ -6,8 +6,10 @@ import BackEnd.Project.ProjectQueries;
 import BackEnd.ProjectType.ProjectTypeQueries;
 import BackEnd.ResToProject.ResToProjectQueries;
 import BackEnd.Resource.AssignedResource;
-import FrontEnd.Home;
+import FrontEnd.Login;
 import Interface.JavaFX;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -20,10 +22,10 @@ import java.util.Optional;
 import static BackEnd.Utility.getDatetime;
 
 
-public class ProjectModify extends Pane
+public class ProjectModify extends ScrollPane
 {
-    static double scalex = Home.scalex;
-    static double scaley = Home.scaley;
+    static double scalex = Login.scalex;
+    static double scaley = Login.scaley;
 
     private Paint black= Paint.valueOf("000000");
     private Paint grey= Paint.valueOf("E9E9E9");
@@ -39,9 +41,15 @@ public class ProjectModify extends Pane
     {
         Project project= ProjectQueries.getProjectById(idProject);
         ResourcePane.count=0;
-        this.setPrefWidth(575*scalex);
+
+        this.setVbarPolicy(ScrollBarPolicy.AS_NEEDED);
+        this.setHbarPolicy(ScrollBarPolicy.NEVER);
+
+        this.setPrefWidth(590*scalex);
         this.setPrefHeight(400*scaley);
         this.setStyle("-fx-background-color: #"+grey.toString().substring(2)+";");
+
+        Pane Content=new Pane();
 
         Label libLB=JavaFX.NewLabel("Libellé",lightBlue,1,20,10,10);
         TextField libField=JavaFX.NewTextField(18,200,10,35);
@@ -55,21 +63,16 @@ public class ProjectModify extends Pane
         ComboBox typeBox=JavaFX.NewComboBox(ProjectTypeQueries.getProjectTypesRef(),200,10,100);
         typeBox.getSelectionModel().select(project.getIdType());
 
-
-        Button confirm=JavaFX.NewButton("Confirmer",lightGreen,18,350,350);
-        Button cancel=JavaFX.NewButton("Annuler",red,18,475,350);
-
-        getChildren().addAll(libLB,libField,porLB,porBox,typeLB,typeBox,confirm,cancel);
+        Content.getChildren().addAll(libLB,libField,porLB,porBox,typeLB,typeBox);
 
         //-Resource-----------------------------------------------------------------------------------------------------------------------------
         int y=110;
-        getChildren().add(JavaFX.NewLabel("Ressources",lightBlue,1,20,10,y+=50));
+        Content.getChildren().add(JavaFX.NewLabel("Ressources",lightBlue,1,20,10,y+=50));
         List<AssignedResource> resourcesList= ResToProjectQueries.getResourceByProject(idProject);
         Pane resourcePanes=new Pane();
         resourcePanes.setLayoutY((y+50)*scaley);
         resourcePaneList= new ArrayList<>();
 
-        int resoureIndex=0;
         for(AssignedResource resource:resourcesList)
         {
             ResourcePane rp=new ResourcePane(resourcePanes,resourcePaneList,resource);
@@ -77,8 +80,11 @@ public class ProjectModify extends Pane
             resourcePanes.getChildren().add(rp);
         }
 
-        getChildren().add(resourcePanes);
+        Content.getChildren().add(resourcePanes);
 
+        Button confirm=JavaFX.NewButton("Confirmer",lightGreen,18,350,75+y+resourcesList.size()*50);
+        Button cancel=JavaFX.NewButton("Annuler",red,18,465,75+y+resourcesList.size()*50);
+        Content.getChildren().addAll(confirm,cancel);
         confirm.addEventFilter(MouseEvent.MOUSE_PRESSED, mouseEvent->
         {
             String label=libField.getText();
@@ -99,13 +105,6 @@ public class ProjectModify extends Pane
                 {
                     ProjectQueries.resetProject(idProject);
                     ProjectQueries.updateProject(idProject,label,idPor,idType);
-                    System.out.println("changed");
-                }
-                else
-                {
-                    parent.resetSelection();
-                    getChildren().clear();
-                    this.setStyle("-fx-background-color: #f3f3f3;");
                 }
             }
 
@@ -126,13 +125,15 @@ public class ProjectModify extends Pane
             getChildren().clear();
             this.setStyle("-fx-background-color: #f3f3f3;");
         });
+
+        setContent(Content);
     }
 
 }
 
 class ResourcePane extends Pane
 {
-    static double scaley = Home.scaley;
+    static double scaley = Login.scaley;
 
     public static int count=0;
     public int index;
@@ -154,9 +155,20 @@ class ResourcePane extends Pane
 
         setLayoutY((index*50)*scaley);
         getChildren().add(JavaFX.NewLabel(resourceName,18,50,0));
-        resourcesCountField=JavaFX.NewTextField(18,75,390,0);
+        resourcesCountField=JavaFX.NewTextField(18,75,380,0);
         resourcesCountField.setText(String.valueOf(quantity));
-        Button delete=JavaFX.NewButton("Supprimer",lightOrange,15,475,0);
+        resourcesCountField.textProperty().addListener(new ChangeListener<String>()
+        {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue)
+            {
+                if (!newValue.matches("\\d*"))
+                {
+                    resourcesCountField.setText(newValue.replaceAll("[^\\d]", ""));
+                }
+            }
+        });
+        Button delete=JavaFX.NewButton("Supprimer",lightOrange,15,460,3);
 
         delete.addEventFilter(MouseEvent.MOUSE_PRESSED, mouseEvent->
         {

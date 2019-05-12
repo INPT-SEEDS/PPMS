@@ -48,7 +48,6 @@ public class ProjectQueries
         Queries.modifyCell("projet","libelle",label,"id="+id);
         Queries.modifyCell("projet","idTypeProjet",String.valueOf(idType),"id="+id);
         Queries.modifyCell("projet","idPortfeuille",String.valueOf(idPortfolio),"id="+id);
-
     }
 
     public static List<String> getProjectsRef()
@@ -66,6 +65,13 @@ public class ProjectQueries
         {e.printStackTrace();}
 
         return projectsRef;
+    }
+
+    public static void resetProject(int idProject,int idUser)
+    {
+        ResToProjectQueries.resetTable(idProject);
+        EvaluateQueries.resetEvaluation(idProject,idUser);
+        ProjectStatueQueries.addToDatabase(idProject,"Non Evalué",0, Utility.getDatetime());
     }
 
     public static void resetProject(int idProject)

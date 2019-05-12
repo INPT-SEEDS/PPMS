@@ -1,8 +1,10 @@
 package FrontEnd.User;
 
+import BackEnd.Privilege.Privilege;
+import BackEnd.Privilege.PrivilegeQueries;
 import BackEnd.Profile.Profile;
 import BackEnd.Profile.ProfileQueries;
-import FrontEnd.Home;
+import FrontEnd.Login;
 import Interface.JavaFX;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -12,11 +14,14 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Paint;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class ProfileModify extends Pane
 {
-    static double scalex = Home.scalex;
-    static double scaley = Home.scaley;
+    static double scalex = Login.scalex;
+    static double scaley = Login.scaley;
 
     private Paint black= Paint.valueOf("000000");
     private Paint grey= Paint.valueOf("E9E9E9");
@@ -25,6 +30,8 @@ public class ProfileModify extends Pane
     private Paint lightOrange= Paint.valueOf("F77D50");
     private Paint lightBlue= Paint.valueOf("5096be");
     private Paint lightGreen= Paint.valueOf("50be96");
+
+    private List<Privilege> privilegeList= PrivilegeQueries.getPriviliges();
 
     public ProfileModify(UserInterface parent, int id)
     {
@@ -44,16 +51,29 @@ public class ProfileModify extends Pane
 
         getChildren().add(JavaFX.NewLabel("Privilège",lightBlue,1,20,10,90));
 
-        CheckBox admin=JavaFX.NewCheckBox("Administrateurs",10,120);
-        CheckBox projectManager=JavaFX.NewCheckBox("Gestionnaires de projets",10,180);
-        CheckBox portfolioManager=JavaFX.NewCheckBox("Gestionnaires de portefeuilles",10,240);
-        CheckBox resourceManager=JavaFX.NewCheckBox("Gestionnaires des ressources",10,300);
-        CheckBox outilManager=JavaFX.NewCheckBox("Générateur d’outils",310,120);
-        CheckBox criteria=JavaFX.NewCheckBox("Générateur de critères",310,180);
-        CheckBox director=JavaFX.NewCheckBox("Directeur",310,240);
-
-        getChildren().addAll(admin,projectManager,portfolioManager,resourceManager,outilManager,criteria,director);
-
+        List<Integer> privilegesId=ProfileQueries.getPrivilegesById(id);
+        CheckBox[] privilegesCheckBox=new CheckBox[privilegeList.size()];
+        int x=0,y=0;
+        int i=0;
+        for(Privilege privilege:privilegeList)
+        {
+            privilegesCheckBox[i]=JavaFX.NewCheckBox(privilege.getName(),x+10,y+120);
+            for(int privilegeId:privilegesId)
+            {
+                if(privilege.getId()==privilegeId)
+                {
+                    privilegesCheckBox[i].setSelected(true);
+                }
+            }
+            getChildren().add(privilegesCheckBox[i]);
+            x+=300;
+            if(i%2==1)
+            {
+                y+=60;
+                x=0;
+            }
+            i++;
+        }
 
         Button confirm=JavaFX.NewButton("Confirmer",lightGreen,18,350,350);
         Button cancel=JavaFX.NewButton("Annuler",red,18,475,350);
@@ -62,6 +82,17 @@ public class ProfileModify extends Pane
 
         confirm.addEventFilter(MouseEvent.MOUSE_PRESSED, mouseEvent->
         {
+            List<Integer> selectedPrivileges=new ArrayList<>();
+            int index=0;
+            for(CheckBox priviligeCheckBox:privilegesCheckBox)
+            {
+                if(priviligeCheckBox.isSelected())
+                {
+                    selectedPrivileges.add(index);
+                }
+                index++;
+            }
+            ProfileQueries.updatePrivileges(id,selectedPrivileges);
             parent.resetSelection();
             this.setStyle("-fx-background-color: #f3f3f3;");
             getChildren().clear();
@@ -74,5 +105,4 @@ public class ProfileModify extends Pane
             this.setStyle("-fx-background-color: #f3f3f3;");
         });
     }
-
 }

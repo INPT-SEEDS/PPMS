@@ -1,15 +1,21 @@
 package Interface;
 
-import FrontEnd.Home;
+import FrontEnd.Login;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.control.TableColumn.CellDataFeatures;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
@@ -22,8 +28,8 @@ import java.util.List;
 public class JavaFX
 {
 
-	static double scalex = Home.scalex;
-	static double scaley = Home.scaley;
+	static double scalex = Login.scalex;
+	static double scaley = Login.scaley;
 	
 	// -------------------NewLabel--------------------------------------------------------------------------------------
 	public static Label NewLabel(String text, Paint color,int style, int size, int x, int y)
@@ -101,7 +107,8 @@ public class JavaFX
 
 	public static Button NewButton(String text, int size,double x, double y)
 	{
-		return NewButton(text,Color.rgb(80, 150, 190), size, x, y);
+		//return NewButton(text,Color.rgb(80, 150, 190), size, x, y);
+		return NewButton(text,Color.rgb(17, 186, 248), size, x, y);
 	}
 		
 	public static Button NewButton(String text, Paint color, int size,double x, double y)
@@ -111,6 +118,27 @@ public class JavaFX
 	public static Button NewButton(String text, Paint color, int size,double x, double y,double width,double height)
 	{
 		return NewButton(text,null,ContentDisplay.LEFT, color, size,x, y,width,height);
+	}
+
+	public static Button Bwsh(String t, ImageView iv)
+	{
+		Button b1 = new Button(t, iv);
+		DropShadow shadow = new DropShadow();
+		b1.addEventHandler(MouseEvent.MOUSE_ENTERED, new EventHandler<MouseEvent>()
+		{
+			@Override public void handle(MouseEvent e)
+			{
+				b1.setEffect(shadow);
+			}
+		});
+		b1.addEventHandler(MouseEvent.MOUSE_EXITED, new EventHandler<MouseEvent>()
+		{
+			@Override public void handle(MouseEvent e)
+			{
+				b1.setEffect(null);
+			}
+		});
+		return b1;
 	}
 
 	// ----------------------NewTextField--------------------------------------------------------------------------------
@@ -164,7 +192,7 @@ public class JavaFX
 		comboBox.setPrefWidth(scalex*w);
 		comboBox.setLayoutX(scalex*x);
 		comboBox.setLayoutY(scaley*y);
-		comboBox.setValue(list[0]);
+		comboBox.getSelectionModel().selectFirst();
 		return comboBox;
 	}
 
@@ -183,7 +211,7 @@ public class JavaFX
 
 		comboBox.setLayoutX(scalex*x);
 		comboBox.setLayoutY(scaley*y);
-		if(list.size()>0)comboBox.setValue(list.get(0));
+		comboBox.getSelectionModel().selectFirst();
 		return comboBox;
 	}
 
@@ -197,7 +225,7 @@ public class JavaFX
 	{
 
 		CheckBox checkBox = new CheckBox(text);
-		checkBox.setFont(new Font("Century Gothic", (int) (scalex * 18)));
+		checkBox.setFont(new Font("Century Gothic", (int) (scalex * 17)));
 		checkBox.setLayoutX(scalex*x);
 		checkBox.setLayoutY(scaley*y);
 		return checkBox;
@@ -272,5 +300,37 @@ public class JavaFX
 		{
 			e.printStackTrace();
 		}
+	}
+
+	// --------------------CloseButton----------------------------------------------------------------------------------
+	public static FlowPane windowclose()
+	{
+		FlowPane windowclose=new FlowPane();
+		HBox h = new HBox();
+		Label text=new Label("Fermer");
+		Label cls = new Label("X");
+		text.setTextFill(Color.BLACK);
+		text.setStyle("-fx-font: 15 vedrana");
+		cls.setTextFill(Color.BLACK);
+		cls.setStyle("-fx-font: 20 verdana;-fx-font-weight: Bold; -fx-backgound-color: red;");
+		h.setPadding(new Insets(3,3,3,3));
+		h.getChildren().addAll(text,cls);
+		h.addEventHandler(MouseEvent.MOUSE_ENTERED,
+				new EventHandler<MouseEvent>() {
+					@Override public void handle(MouseEvent e) {
+						cls.setTextFill(Color.rgb(200,40,40));
+						text.setTextFill(Color.rgb(200,40,40));
+					}
+				});
+		h.addEventHandler(MouseEvent.MOUSE_EXITED,
+				new EventHandler<MouseEvent>() {
+					@Override public void handle(MouseEvent e) {
+						cls.setTextFill(Color.BLACK);
+						text.setTextFill(Color.BLACK);
+					}
+				});
+		windowclose.getChildren().addAll(h);
+		windowclose.setAlignment(Pos.CENTER_RIGHT);
+		return windowclose;
 	}
 }

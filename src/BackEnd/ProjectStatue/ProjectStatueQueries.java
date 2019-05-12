@@ -34,4 +34,20 @@ public class ProjectStatueQueries
 
         return projectsStatue;
     }
+
+    public static int getProjectEvalutionCount(int idProject)
+    {
+        ResultSet rs= Queries.getResultSetWhere("projetetat","NombreEvaluation","idProjet="+idProject);
+        try
+        {
+            if(rs.next())
+            {
+                return rs.getInt(1);
+            }
+
+        }
+        catch (SQLException e)
+        {e.printStackTrace();}
+        return 0;
+    }
 }

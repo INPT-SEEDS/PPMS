@@ -5,9 +5,9 @@ public class Evaluate
     private int idProject;
     private int idCritere;
     private int weight;
-    private float value;
+    private int value;
 
-    Evaluate(int idProject,int idCritere,int weight,float value)
+    Evaluate(int idProject,int idCritere,int weight,int value)
     {
         this.idProject=idProject;
         this.idCritere=idCritere;
@@ -20,7 +20,7 @@ public class Evaluate
         return idCritere;
     }
 
-    public float getValue()
+    public int getValue()
     {
         return value;
     }

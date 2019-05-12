@@ -1,8 +1,9 @@
 package FrontEnd.Portfolio;
 
 import BackEnd.Portfolio.PortfolioQueries;
+import BackEnd.User.User;
 import BackEnd.Utility;
-import FrontEnd.Home;
+import FrontEnd.Login;
 import Interface.JavaFX;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -12,13 +13,13 @@ import javafx.scene.paint.Paint;
 
 public class PortfolioInterface extends Pane
 {
-	static double scalex = Home.scalex;
-	static double scaley = Home.scaley;
+	static double scalex = Login.scalex;
+	static double scaley = Login.scaley;
 
 	private Paint black=Paint.valueOf("000000");
 	private Paint red=Paint.valueOf("F04040");
 	private Paint lightOrange=Paint.valueOf("F77D50");
-	private Paint lightBlue=Paint.valueOf("5096be");
+	private Paint lightBlue=Paint.valueOf("11BAF8");
 	private Paint lightGreen=Paint.valueOf("50be96");
 
 	private Button bar,modify, evaluate;
@@ -27,7 +28,7 @@ public class PortfolioInterface extends Pane
 	private TableView tvPortfolio;
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public PortfolioInterface(double x,double y)
+	public PortfolioInterface(User user, double x, double y)
 	{
 		this.setLayoutX(x*scalex);
 		this.setLayoutY(y*scaley);
@@ -110,6 +111,7 @@ public class PortfolioInterface extends Pane
 			setActive(false);
 			setActionBar(false);
 			addPane.getChildren().addAll(addBar,idField,refField,libField,confirm,cancel);
+			idField.setText(String.valueOf(tvPortfolio.getItems().size()));
 			tvPortfolio.getSelectionModel().clearSelection();
 		});
 		confirm.addEventFilter(MouseEvent.MOUSE_PRESSED, mouseEvent->
@@ -117,10 +119,23 @@ public class PortfolioInterface extends Pane
 			int id=Integer.valueOf(idField.getText());
 			String ref=refField.getText();
 			String label=libField.getText();
-			PortfolioQueries.addToDatabase(id,ref,label);
-			refreshTable();
-			addPane.getChildren().clear();
-			setActive(true);
+			if(ref.length()>0 && label.length()>0)
+			{
+				PortfolioQueries.addToDatabase(id,ref,label);
+				refreshTable();
+				refField.clear();libField.clear();
+				addPane.getChildren().clear();
+				setActive(true);
+			}
+			else
+			{
+				Alert alert = new Alert(Alert.AlertType.ERROR);
+				alert.setTitle("Erreur");
+				alert.setHeaderText(null);
+				alert.setContentText("Veuillez remplir tous les champs");
+				alert.showAndWait();
+			}
+
 		});
 
 		cancel.addEventFilter(MouseEvent.MOUSE_PRESSED, mouseEvent->

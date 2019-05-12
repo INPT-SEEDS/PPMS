@@ -14,6 +14,24 @@ public class CriterionTypeQueries
         Queries.insertInto("typecritere",id+",'"+ref+"','"+label+"'");
     }
 
+    public static CriterionType getCriteriaTypeById(int id)
+    {
+        ResultSet rs=Queries.getResultSetWhere("typecritere","*","id="+id);
+        try
+        {
+            if(rs.next())
+            {
+                String ref=rs.getString(2);
+                String label=rs.getString(3);
+                return new CriterionType(id,ref,label);
+            }
+        }
+        catch (SQLException e)
+        {e.printStackTrace();}
+
+        return null;
+    }
+
     public static List<CriterionType> getCriteriaTypes()
     {
         List<CriterionType> criteriaTypeList=new ArrayList<>();
@@ -54,5 +72,11 @@ public class CriterionTypeQueries
     public static ResultSet getResultSet()
     {
         return Queries.getResultSet("typecritere");
+    }
+
+    public static void update(int id,String ref,String label)
+    {
+        Queries.modifyCell("typecritere","libelle",label,"id="+id);
+        Queries.modifyCell("typecritere","reference",ref,"id="+id);
     }
 }
