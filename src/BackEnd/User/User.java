@@ -27,7 +27,6 @@ public class User
         this.lastname = lastname;
         this.phone = phone;
         this.idProfile = idProfile;
-        userPrivileges= ProfileQueries.getPrivilegesById(idProfile);
     }
 
     public int getId()
@@ -69,5 +68,30 @@ public class User
     {
         UserEvaluations = EvaluateQueries.getUserProjectEvaluation(idProject, id);
         return UserEvaluations;
+    }
+
+    public boolean isPrivilegedTo(int index)
+    {
+        userPrivileges= ProfileQueries.getPrivilegesById(idProfile);
+        for(int i: userPrivileges)
+        {
+            if(i==index)
+            return true;
+        }
+        return false;
+    }
+
+    public boolean isPrivilegedTo(int... integers)
+    {
+        userPrivileges= ProfileQueries.getPrivilegesById(idProfile);
+        for(int i: userPrivileges)
+        {
+            for(int j: integers)
+            {
+                if(j==i)
+                    return true;
+            }
+        }
+        return false;
     }
 }

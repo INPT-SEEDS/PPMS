@@ -1,5 +1,7 @@
 package BackEnd.Evaluate;
 
+import BackEnd.PortfolioCriteria.PortfolioCriteriaQueries;
+import BackEnd.Project.ProjectQueries;
 import BackEnd.Queries;
 
 import java.sql.ResultSet;
@@ -55,6 +57,24 @@ public class EvaluateQueries
         {e.printStackTrace();}
 
         return evaluationList;
+    }
+
+    public static boolean isEvalutedByUser(int idProject,int idUser)
+    {
+        ResultSet rs=Queries.getResultSetWhere("evaluer","count(*)","idProjet="+idProject+" AND idUtilisateur="+idUser);
+        try
+        {
+            if(rs.next())
+            {
+                int portfolioCriteria= PortfolioCriteriaQueries.getCriteriaByPortfolio(ProjectQueries.getProjectById(idProject).getIdPortfolio()).size();
+                if(rs.getInt(1)==portfolioCriteria)
+                return true;
+            }
+        }
+        catch (SQLException e)
+        {e.printStackTrace();}
+
+        return false;
     }
 
     public static boolean isEvalutedByUser(int idProject,int idUser,int idCriterion)

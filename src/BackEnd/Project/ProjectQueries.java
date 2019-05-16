@@ -43,6 +43,23 @@ public class ProjectQueries
         return null;
     }
 
+    public static int getPortfolioId(int idProject)
+    {
+        ResultSet rs=Queries.getResultSetWhere("projet","*","id="+idProject);
+        try
+        {
+            if(rs.next())
+            {
+                return rs.getInt(3);
+            }
+        }
+        catch(SQLException e)
+        {
+            e.printStackTrace();
+        }
+        return -1;
+    }
+
     public static void updateProject(int id,String label,int idPortfolio,int idType)
     {
         Queries.modifyCell("projet","libelle",label,"id="+id);

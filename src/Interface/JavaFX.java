@@ -30,14 +30,15 @@ public class JavaFX
 
 	static double scalex = Login.scalex;
 	static double scaley = Login.scaley;
-	
+
 	// -------------------NewLabel--------------------------------------------------------------------------------------
 	public static Label NewLabel(String text, Paint color,int style, int size, int x, int y)
 	{
 		Label label = new Label(text);
 		FontWeight fontWeight=FontWeight.NORMAL;
 		if(style==1) fontWeight=FontWeight.BOLD;
-			label.setFont(Font.font("Century Gothic",fontWeight, (int) (scalex * size)));
+		label.setFont(Font.font("Century Gothic",fontWeight, (int) (scalex * size)));
+		if(style==2) label.setStyle("-fx-font-style: italic;");
 		label.setTextFill(color);
 		label.setLayoutX(scalex*x);
 		label.setLayoutY(scaley*y);
@@ -79,9 +80,10 @@ public class JavaFX
 			imageView.setSmooth(true);
 			button.setGraphic(imageView);
 		}
-			
+
 	    button.setContentDisplay(contentDisplay);
 		button.setStyle("-fx-base: #"+color.toString().substring(2)+";");
+		//button.setStyle("-fx-base: #FFFFFF00;");
 		button.setFont(Font.font("Century Gothic",FontWeight.BOLD, (int) (scalex * size)));
 		button.setTextFill(Color.WHITE);
 		button.setLayoutX(scalex*x);
@@ -110,7 +112,7 @@ public class JavaFX
 		//return NewButton(text,Color.rgb(80, 150, 190), size, x, y);
 		return NewButton(text,Color.rgb(17, 186, 248), size, x, y);
 	}
-		
+
 	public static Button NewButton(String text, Paint color, int size,double x, double y)
 	{
 		return NewButton( text,  color,  size, x,  y,0,0);
@@ -182,18 +184,69 @@ public class JavaFX
 		return NewImage(path, (int)image.getWidth(),  (int)image.getHeight(), x, y);
 	}
 
+	public static ImageView NewNext()
+	{
+		ImageView next=JavaFX.NewImage("res/icon/Next.png",150,120,1150,615);
+		Image org=next.getImage();
+		ImageView hovered=JavaFX.NewImage("res/icon/NextHovered.png",120,150,0,0);
+		next.addEventFilter(MouseEvent.MOUSE_ENTERED, mouseEvent -> next.setImage(hovered.getImage()));
+		next.addEventFilter(MouseEvent.MOUSE_EXITED, mouseEvent ->next.setImage(org));
+		return next;
+	}
+	public static ImageView NewPrevious()
+	{
+		ImageView next=JavaFX.NewImage("res/icon/Previous.png",150,120,50,615);
+		Image org=next.getImage();
+		ImageView hovered=JavaFX.NewImage("res/icon/PreviousHovered.png",120,150,0,0);
+		next.addEventFilter(MouseEvent.MOUSE_ENTERED, mouseEvent -> next.setImage(hovered.getImage()));
+		next.addEventFilter(MouseEvent.MOUSE_EXITED, mouseEvent ->next.setImage(org));
+		return next;
+	}
+	public static ImageView NewEnd()
+	{
+		ImageView next=JavaFX.NewImage("res/icon/End.png",150,75,600,655);
+		Image org=next.getImage();
+		ImageView hovered=JavaFX.NewImage("res/icon/EndHovered.png",150,75,0,0);
+		next.addEventFilter(MouseEvent.MOUSE_ENTERED, mouseEvent -> next.setImage(hovered.getImage()));
+		next.addEventFilter(MouseEvent.MOUSE_EXITED, mouseEvent ->next.setImage(org));
+		return next;
+	}
+	public static ImageView NewImageButton(String name,int w,int h,int x, int y)
+	{
+		ImageView button=JavaFX.NewImage("res/icon/"+name+".png",w,h,x,y);
+		Image org=button.getImage();
+		ImageView hovered=JavaFX.NewImage("res/icon/"+name+"Hovered.png",150,75,0,0);
+		button.addEventFilter(MouseEvent.MOUSE_ENTERED, mouseEvent -> button.setImage(hovered.getImage()));
+		button.addEventFilter(MouseEvent.MOUSE_EXITED, mouseEvent ->button.setImage(org));
+		return button;
+	}
+
+
 	// --------------------NewComboBox----------------------------------------------------------------------------------
-	public static ComboBox<String> NewComboBox(String[] list, int w, int x, int y)
+	public static ComboBox<String> NewComboBox(String[] list, int w,int h, int x, int y)
 	{
 		ObservableList<String> observableList=FXCollections.observableArrayList(list);
 		ComboBox<String> comboBox = new ComboBox<>(observableList);
-		comboBox.setStyle("-fx-font: "+(int) (scalex * 18)+"px \"Century Gothic\";");
 
+		int size=18;
 		comboBox.setPrefWidth(scalex*w);
+		if(h>0)
+		{
+			size+=(h-comboBox.getPrefHeight())/6;
+			comboBox.setPrefHeight(scaley*h);
+		}
+
+		comboBox.setStyle("-fx-font: "+(int) (scalex * size)+"px \"Century Gothic\";");
+
 		comboBox.setLayoutX(scalex*x);
 		comboBox.setLayoutY(scaley*y);
 		comboBox.getSelectionModel().selectFirst();
 		return comboBox;
+	}
+
+	public static ComboBox<String> NewComboBox(String[] list, int w, int x, int y)
+	{
+		return NewComboBox(list,w,0,x,y);
 	}
 
 	public static ComboBox<String> NewComboBox(String[] list, int x, int y)
@@ -201,18 +254,29 @@ public class JavaFX
 			return NewComboBox(list, 350, x, y);
 		}
 
-	public static ComboBox<String> NewComboBox(List<String> list, int w, int x, int y)
+	public static ComboBox<String> NewComboBox(List<String> list, int w,int h, int x, int y)
 	{
 		ObservableList<String> observableList=FXCollections.observableArrayList(list);
 		ComboBox<String> comboBox = new ComboBox<>(observableList);
-		comboBox.setStyle("-fx-font: "+(int) (scalex * 18)+"px \"Century Gothic\";");
 
+		int size=18;
 		comboBox.setPrefWidth(scalex*w);
+		if(h>0)
+		{
+			size+=(h-comboBox.getPrefHeight())/6;
+			comboBox.setPrefHeight(scaley*h);
+		}
+
+		comboBox.setStyle("-fx-font: "+(int) (scalex * size)+"px \"Century Gothic\";");
 
 		comboBox.setLayoutX(scalex*x);
 		comboBox.setLayoutY(scaley*y);
 		comboBox.getSelectionModel().selectFirst();
 		return comboBox;
+	}
+	public static ComboBox<String> NewComboBox(List<String> list,int w, int x, int y)
+	{
+		return NewComboBox(list,w,0,x,y);
 	}
 
 	public static ComboBox<String> NewComboBox(List<String> list, int x, int y)
@@ -221,14 +285,18 @@ public class JavaFX
 	}
 
 	// --------------------NewCheckBox----------------------------------------------------------------------------------
-	public static CheckBox NewCheckBox(String text,int x,int y)
+	public static CheckBox NewCheckBox(String text,int size,int x,int y)
 	{
 
 		CheckBox checkBox = new CheckBox(text);
-		checkBox.setFont(new Font("Century Gothic", (int) (scalex * 17)));
+		checkBox.setFont(new Font("Century Gothic", (int) (scalex * size)));
 		checkBox.setLayoutX(scalex*x);
 		checkBox.setLayoutY(scaley*y);
 		return checkBox;
+	}
+	public static CheckBox NewCheckBox(String text,int x,int y)
+	{
+		return NewCheckBox(text,17,x,y);
 	}
 
 	// --------------------NewTableView----------------------------------------------------------------------------------
@@ -239,8 +307,8 @@ public class JavaFX
 		TableView tableview=new TableView();
 		tableview.setLayoutX(scalex*x);
 		tableview.setLayoutY(scaley*y);
-		tableview.setPrefWidth(scalex*w);
-		tableview.setPrefHeight(scaley*h);
+		tableview.setPrefWidth(scalex*(w+5));
+		tableview.setPrefHeight(scaley*(h+5));
 		tableview.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
 
@@ -303,15 +371,15 @@ public class JavaFX
 	}
 
 	// --------------------CloseButton----------------------------------------------------------------------------------
-	public static FlowPane windowclose()
+	public static FlowPane windowclose(Color color)
 	{
 		FlowPane windowclose=new FlowPane();
 		HBox h = new HBox();
 		Label text=new Label("Fermer");
 		Label cls = new Label("X");
-		text.setTextFill(Color.BLACK);
+		text.setTextFill(color);
 		text.setStyle("-fx-font: 15 vedrana");
-		cls.setTextFill(Color.BLACK);
+		cls.setTextFill(color);
 		cls.setStyle("-fx-font: 20 verdana;-fx-font-weight: Bold; -fx-backgound-color: red;");
 		h.setPadding(new Insets(3,3,3,3));
 		h.getChildren().addAll(text,cls);
@@ -325,12 +393,21 @@ public class JavaFX
 		h.addEventHandler(MouseEvent.MOUSE_EXITED,
 				new EventHandler<MouseEvent>() {
 					@Override public void handle(MouseEvent e) {
-						cls.setTextFill(Color.BLACK);
-						text.setTextFill(Color.BLACK);
+						cls.setTextFill(color);
+						text.setTextFill(color);
 					}
 				});
 		windowclose.getChildren().addAll(h);
 		windowclose.setAlignment(Pos.CENTER_RIGHT);
 		return windowclose;
+	}
+
+	public static void privilegeAlert()
+	{
+		Alert alert = new Alert(Alert.AlertType.ERROR);
+		alert.setTitle("Attention");
+		alert.setContentText("Vous n'avez pas le droit d'accéder à cette option ou effectuer cette opération!");
+		alert.setHeaderText(null);
+		alert.showAndWait();
 	}
 }

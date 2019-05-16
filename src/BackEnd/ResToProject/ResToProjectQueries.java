@@ -12,6 +12,7 @@ public class ResToProjectQueries
 {
     public static void addToDatabase(int id, int idRes, String date, int quantity)
     {
+        resetTable(id,idRes);
         Queries.insertInto("affecterPro",id+","+idRes+",'"+date+"',"+quantity);
     }
 
@@ -36,6 +37,22 @@ public class ResToProjectQueries
         {e.printStackTrace();}
 
         return resourceList;
+    }
+
+    public static int getResourceCount(int idProject,int idRes)
+    {
+        ResultSet rs=Queries.getResultSetWhere("affecterPro","*","idProjet="+idProject+" AND idRessource="+idRes);
+        try
+        {
+            if(rs.next())
+            {
+                return rs.getInt(4);
+            }
+        }
+        catch (SQLException e)
+        {e.printStackTrace();}
+
+        return 0;
     }
 
     public static void resetTable(int idProject, int idResource)

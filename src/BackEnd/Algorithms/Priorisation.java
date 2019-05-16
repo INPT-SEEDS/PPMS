@@ -57,7 +57,6 @@ public class Priorisation
     public static void algorithme(List<Project> projectsList)
     {
         int portfolioId=projectsList.get(0).getIdPortfolio();
-        System.out.println(portfolioId);
         List<PortfolioCriteria> criteriaList= PortfolioCriteriaQueries.getCriteriaByPortfolio(portfolioId);
 
         int projectsCount=projectsList.size();
@@ -143,6 +142,22 @@ public class Priorisation
             float value= (float) ((int)(10000*sommetab(matfinale[i])))/10000;
             project.setTotalValue(value);
             i++;
+        }
+
+        //Sorting projects
+        for(int p=0;p<projectsList.size()-1;p++)
+        {
+            float max=projectsList.get(p).getTotalValue();
+            for(int q=p+1;q<projectsList.size();q++)
+            {
+                if(projectsList.get(q).getTotalValue()>max)
+                {
+                    max=projectsList.get(q).getTotalValue();
+                    Project temp=projectsList.get(p);
+                    projectsList.set(p,projectsList.get(q));
+                    projectsList.set(q,temp);
+                }
+            }
         }
     }
 }

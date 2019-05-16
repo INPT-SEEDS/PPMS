@@ -1,11 +1,11 @@
 package FrontEnd;
 
 import BackEnd.User.User;
-import FrontEnd.Criterion.CriterionInterface;
-import FrontEnd.Portfolio.PortfolioInterface;
-import FrontEnd.Project.ProjectInterface;
-import FrontEnd.Resource.ResourceInterface;
-import FrontEnd.User.UserInterface;
+import FrontEnd.DatabaseManagement.Criterion.CriterionInterface;
+import FrontEnd.DatabaseManagement.Portfolio.PortfolioInterface;
+import FrontEnd.DatabaseManagement.Project.ProjectInterface;
+import FrontEnd.DatabaseManagement.Resource.ResourceInterface;
+import FrontEnd.DatabaseManagement.User.UserInterface;
 import Interface.JavaFX;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -20,6 +20,8 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+
+import java.io.File;
 
 public class Manage
 {
@@ -51,23 +53,26 @@ public class Manage
         Pane titleBar=new Pane();
         titleBar.setLayoutX(0);
         titleBar.setLayoutY(0);
-        titleBar.setPrefSize(screenWidth, screenHeight/20);
+        titleBar.setPrefSize(screenWidth, screenHeight/30);
         titleBar.setBackground(new Background(new BackgroundFill(grey, CornerRadii.EMPTY, Insets.EMPTY)));
 
-        titleBar.getChildren().add(JavaFX.NewLabel("     Project Portfolio \nManagement System",white,1, 18,2, 2));
+        titleBar.getChildren().add(JavaFX.NewLabel("     Project Portfolio Management System",white,1, 23,2, 2));
 
         evaluation=	JavaFX.NewButton("Evaluation", lightBlue, 21, 192, 0, 192, 54);
         planification=	JavaFX.NewButton("Planification", darkBlue, 21, 2*192, 0, 192, 54);
         monitoring=		JavaFX.NewButton("Monitoring", darkBlue, 21, 3*192, 0, 192, 54);
 
-        Button close=JavaFX.NewButton("X", lightBlue, 20, 1860,0, 60, 54);
-        Button minimize= JavaFX.NewButton("─", lightGrey, 20, 1800,0, 60, 54);
+        Button close=JavaFX.NewButton("X", lightBlue, 18, 1860,0, 60, 36);
+        Button minimize= JavaFX.NewButton("─", lightGrey, 19, 1800,0, 60, 36);
 
-
-        close.addEventFilter(MouseEvent.MOUSE_CLICKED, mouseEvent -> primaryStage.close());
+        close.addEventFilter(MouseEvent.MOUSE_CLICKED, mouseEvent ->
+        {
+            new File("Branch.xml").delete();
+            primaryStage.close();
+        });
         minimize.addEventFilter(MouseEvent.MOUSE_CLICKED, mouseEvent -> primaryStage.setIconified(true));
 
-        titleBar.getChildren().addAll(evaluation,planification,monitoring);
+        //titleBar.getChildren().addAll(evaluation,planification,monitoring);
         titleBar.getChildren().add(close);
         titleBar.getChildren().add(minimize);
         layout.getChildren().add(titleBar);
@@ -75,8 +80,8 @@ public class Manage
         //------------------------------------------Tabs----------------------------------------------------------------
         Pane tabsBar=new Pane();
         tabsBar.setLayoutX(0);
-        tabsBar.setLayoutY(screenHeight/20);
-        tabsBar.setPrefSize(screenWidth/10, screenHeight*19/20);
+        tabsBar.setLayoutY(screenHeight/30);
+        tabsBar.setPrefSize(screenWidth/10, screenHeight*29/30);
         tabsBar.setBackground(new Background(new BackgroundFill(darkerBlue, CornerRadii.EMPTY, Insets.EMPTY)));
 
         Image portfolioIcon = new Image("file:res/icon/portfolio/portfolio.png");
@@ -98,11 +103,31 @@ public class Manage
         tabsBar.getChildren().add(resources);
         tabsBar.getChildren().add(criteria);
 
-        portfolios.	addEventFilter(MouseEvent.MOUSE_PRESSED, mouseEvent -> setSelectedTab(1));
-        projects.	addEventFilter(MouseEvent.MOUSE_PRESSED, mouseEvent -> setSelectedTab(2));
-        users.		addEventFilter(MouseEvent.MOUSE_PRESSED, mouseEvent -> setSelectedTab(3));
-        resources.	addEventFilter(MouseEvent.MOUSE_PRESSED, mouseEvent -> setSelectedTab(4));
-        criteria.	addEventFilter(MouseEvent.MOUSE_PRESSED, mouseEvent -> setSelectedTab(5));
+        portfolios.	addEventFilter(MouseEvent.MOUSE_PRESSED, mouseEvent ->
+        {if(user.isPrivilegedTo(0,1,2,6))
+            setSelectedTab(1);
+        else JavaFX.privilegeAlert();});
+
+        projects.	addEventFilter(MouseEvent.MOUSE_PRESSED, mouseEvent ->
+        {if(user.isPrivilegedTo(0,1,2,6))
+            setSelectedTab(2);
+        else JavaFX.privilegeAlert();});
+
+        users.		addEventFilter(MouseEvent.MOUSE_PRESSED, mouseEvent ->
+        {if(user.isPrivilegedTo(0))
+            setSelectedTab(3);
+        else JavaFX.privilegeAlert();});
+
+        resources.	addEventFilter(MouseEvent.MOUSE_PRESSED, mouseEvent ->
+        {if(user.isPrivilegedTo(3))
+            setSelectedTab(4);
+        else JavaFX.privilegeAlert();});
+
+        criteria.	addEventFilter(MouseEvent.MOUSE_PRESSED, mouseEvent ->
+        {if(user.isPrivilegedTo(6))
+            setSelectedTab(5);
+        else JavaFX.privilegeAlert();});
+
         layout.getChildren().add(tabsBar);
 
         //------------------------------------------Content-------------------------------------------------------------

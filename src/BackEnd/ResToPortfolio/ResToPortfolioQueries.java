@@ -12,6 +12,7 @@ public class ResToPortfolioQueries
 {
     public static void addToDatabase(int id, int idRes, String date, int quantity)
     {
+        resetTable(id,idRes);
         Queries.insertInto("affecterPor",id+","+idRes+",'"+date+"',"+quantity);
     }
 
@@ -36,6 +37,22 @@ public class ResToPortfolioQueries
         {e.printStackTrace();}
 
         return resourceList;
+    }
+
+    public static int getResourceCount(int idPortfolio,int idRes)
+    {
+        ResultSet rs=Queries.getResultSetWhere("affecterPor","*","idPortfeuille="+idPortfolio+" AND idRessource="+idRes);
+        try
+        {
+            if(rs.next())
+            {
+                return rs.getInt(4);
+            }
+        }
+        catch (SQLException e)
+        {e.printStackTrace();}
+
+        return 0;
     }
 
     public static void resetTable(int idPortfolio, int idResource)

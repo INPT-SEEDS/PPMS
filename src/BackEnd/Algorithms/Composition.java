@@ -84,10 +84,10 @@ public class Composition
 
 		CompositionString = CompositionString + " (";
 
-		for (int j = 1; j < i; j++) {
+		for (int j = 1; j < i+1; j++) {
 			String a = String.valueOf(j);
 
-			if (j == i - 1)
+			if (j == i)
 			{
 				if (Test.contains(a))
 				{

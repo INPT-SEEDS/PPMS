@@ -25,6 +25,7 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
@@ -229,7 +230,7 @@ public class Login extends Application
                             }
                             else
                             {
-                                l4.setText("         Vous êtes un nouvel utilisateur.\n Veuillez créer un nouveau mot de passe");
+                                l4.setText("Veuillez créer un nouveau mot de passe");
                                 l4.setTextFill(Color.rgb(15,75,0));
                                 h3.setVisible(true);
                                 passwd.clear();
@@ -244,6 +245,7 @@ public class Login extends Application
                             l4.setText("");
                             stage.close();
                             Manage.start(user,screenWidth,screenHeight);
+                            Home.start(user,screenWidth,screenHeight);
                         }
                         else
                         {
@@ -254,15 +256,18 @@ public class Login extends Application
                             logIn.setDisable(false);
                             passwd.clear();
                         }
-
                     }
                 }
             }
         });
 
-        FlowPane CloseB=JavaFX.windowclose();
+        FlowPane CloseB=JavaFX.windowclose(Color.BLACK);
         CloseB.setAlignment(Pos.CENTER_RIGHT);
-        CloseB.addEventFilter(MouseEvent.MOUSE_CLICKED, mouseEvent -> stage.close());
+        CloseB.addEventFilter(MouseEvent.MOUSE_CLICKED, mouseEvent ->
+        {
+            new File("Branch.xml").delete();
+            stage.close();
+        });
 
         BorderPane bp = new BorderPane();
         Background bgr = new Background(new BackgroundFill(new ImagePattern(new Image("/res/icon/login/bgs.png")),
@@ -271,12 +276,21 @@ public class Login extends Application
         bp.setTop(CloseB);
         bp.setCenter(v1);
 
-        //Scene
         Scene sc = new Scene(bp, 700 * scalex, 400 * scaley);
         stage.setScene(sc);
         stage.setResizable(false);
         stage.initStyle(StageStyle.UNDECORATED);
         stage.show();
+
+        /*Stage ff=new Stage();
+        Pane pp=new Pane();
+        Portfolio p= PortfolioQueries.getPortfolioById(0);
+        System.out.println(p.GetProjectsCount());
+        pp.getChildren().add(Graph.CreateGraphWithPortfolio(p));
+        Scene ss=new Scene(pp,1366,786);
+        ff.setScene(ss);
+        ff.sizeToScene();
+        ff.show();*/
 
         /*Pane p=new Pane();
         p.getChildren().add(JavaFX.NewLabel("WOOOW",18,0,0));
