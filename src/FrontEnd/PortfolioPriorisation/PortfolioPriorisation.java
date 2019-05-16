@@ -78,15 +78,17 @@ public class PortfolioPriorisation extends Pane
         {
             String stat= ProjectStatueQueries.getProjectStatue(project.getId());
             int evaluationCount=ProjectStatueQueries.getProjectEvaluationCount(project.getId());
+            projectsBox[i]=JavaFX.NewCheckBox(project.getLabel(),25,x+435+75,y+275);
+
             Color statColor=Color.LIGHTSLATEGREY;
             if(stat.equals("Non Evalué"))
             {
                 statColor=Color.INDIANRED;
+                projectsBox[i].setDisable(true);
             }
             Button statIcon=JavaFX.NewButton(stat+" ("+evaluationCount+")",statColor,17,x+370,y+275,140,35);
 
             selectProjects.getChildren().add(statIcon);
-            projectsBox[i]=JavaFX.NewCheckBox(project.getLabel(),25,x+435+75,y+275);
             selectProjects.getChildren().add(projectsBox[i]);
             x+=315;
             if(i%2==1)

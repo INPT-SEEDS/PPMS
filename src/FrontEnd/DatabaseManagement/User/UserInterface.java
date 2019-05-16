@@ -29,7 +29,7 @@ public class UserInterface extends Pane
 	private Paint lightBlue=Paint.valueOf("11BAF8");
 	private Paint lightGreen=Paint.valueOf("50be96");
 
-	private Button add,bar,modify,disable;
+	private Button add,bar,modify;
 	private Button add2,bar2,modify2;
 
 	private ComboBox idProField;
@@ -46,13 +46,11 @@ public class UserInterface extends Pane
 		Image disableIcon= new Image("file:res/icon/user/Disable.png");
 
 		//--User-Table--------------------------------------------------------------------------------------------------------------------------------
-		bar=JavaFX.NewButton("",black,2, 780, 85,775,10);
+		bar=JavaFX.NewButton("",black,2, 780, 85,450,10);
 		modify=JavaFX.NewButton("Modifier l'utilisateur", modifyIcon, ContentDisplay.LEFT, lightBlue, 16,1110 ,74 , 220, 32);
-		disable=JavaFX.NewButton("Desactiver l'utilisateur", disableIcon, ContentDisplay.LEFT, red, 16,1340 ,74 , 235, 32);
-		
+
 		getChildren().add(bar);
 		getChildren().add(modify);
-		getChildren().add(disable);
 
 		setActionBar(false);
 	
@@ -294,7 +292,6 @@ public class UserInterface extends Pane
 	{
 
 		modify.setVisible(visbility);
-		disable.setVisible(visbility);
 		bar.setVisible(visbility);
 	}
 

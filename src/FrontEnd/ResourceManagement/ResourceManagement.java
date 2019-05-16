@@ -9,6 +9,8 @@ import BackEnd.Utility;
 import FrontEnd.Home;
 import FrontEnd.Login;
 import Interface.JavaFX;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ScrollPane;
@@ -108,13 +110,27 @@ public class ResourceManagement extends Pane
         TextField resField=JavaFX.NewTextField(20,100,700,103);
         resField.setDisable(true);
         resField.setText(String.valueOf(resourceCount));
+        resField.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue)
+            {
+                if (!newValue.matches("\\d*"))
+                {resField.setText(newValue.replaceAll("[^\\d]", ""));}
+            }});
 
         Button change=JavaFX.NewButton("Changer",Color.SKYBLUE,17,800,100,150,40);
         change.addEventFilter(MouseEvent.MOUSE_PRESSED, mouseEvent ->
         {
             if(change.getText().equals("Enregistrer"))
             {
-                ResToPortfolioQueries.addToDatabase(idPortfolio,idResource, Utility.getDatetime(),Integer.valueOf(resField.getText()));
+                int count=0;
+                try
+                {
+                    count=Integer.valueOf(resField.getText());
+                }
+                catch (Exception ignored){}
+                resField.setText(String.valueOf(count));
+                ResToPortfolioQueries.addToDatabase(idPortfolio,idResource, Utility.getDatetime(),count);
 
                 change.setText("Changer");
                 change.setStyle("-fx-base: #87CEEB;");
@@ -151,6 +167,13 @@ public class ResourceManagement extends Pane
             int projectResourceCount= ResToProjectQueries.getResourceCount(project.getId(),idResource);
             projectContent.getChildren().add(JavaFX.NewLabel("Ressources requises pour ce projet ",Color.WHITE,0,22,270,index*50+15));
             TextField projectResField=JavaFX.NewTextField(20,100,650,index*50+10);
+            projectResField.textProperty().addListener(new ChangeListener<String>() {
+                @Override
+                public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue)
+                {
+                    if (!newValue.matches("\\d*"))
+                    {projectResField.setText(newValue.replaceAll("[^\\d]", ""));}
+                }});
             projectResField.setDisable(true);
             projectResField.setText(String.valueOf(projectResourceCount));
 
@@ -159,7 +182,11 @@ public class ResourceManagement extends Pane
             {
                 if(change2.getText().equals("Enregistrer"))
                 {
-                    ResToProjectQueries.addToDatabase(project.getId(),idResource,Utility.getDatetime(),Integer.valueOf(projectResField.getText()));
+                    int count=0;
+                    try{count=Integer.valueOf(projectResField.getText());}
+                    catch (Exception ignored){}
+                    projectResField.setText(String.valueOf(count));
+                    ResToProjectQueries.addToDatabase(project.getId(),idResource,Utility.getDatetime(),count);
 
                     change2.setText("Changer");
                     change2.setStyle("-fx-base: #87CEEB;");

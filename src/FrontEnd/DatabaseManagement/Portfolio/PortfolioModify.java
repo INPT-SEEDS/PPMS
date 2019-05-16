@@ -8,8 +8,6 @@ import BackEnd.PortfolioCriteria.PortfolioCriteria;
 import BackEnd.PortfolioCriteria.PortfolioCriteriaQueries;
 import BackEnd.Project.Project;
 import BackEnd.ProjectStatue.ProjectStatueQueries;
-import BackEnd.ResToPortfolio.ResToPortfolioQueries;
-import BackEnd.Resource.AssignedResource;
 import BackEnd.Utility;
 import FrontEnd.Login;
 import Interface.JavaFX;
@@ -20,8 +18,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Paint;
 
-import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.List;
 
 public class PortfolioModify extends ScrollPane
@@ -37,14 +33,11 @@ public class PortfolioModify extends ScrollPane
     private Paint lightBlue= javafx.scene.paint.Paint.valueOf("5096be");
     private Paint lightGreen= Paint.valueOf("50be96");
 
-    public ArrayList<ResourcePane> resourcePaneList;
-
     Pane criteriaPane;
 
     public PortfolioModify(PortfolioInterface parent, int idPortfolio)
     {
         Portfolio portfolio= PortfolioQueries.getPortfolioById(idPortfolio);
-        ResourcePane.count=0;
 
         this.setVbarPolicy(ScrollBarPolicy.AS_NEEDED);
         this.setHbarPolicy(ScrollBarPolicy.NEVER);
@@ -61,8 +54,6 @@ public class PortfolioModify extends ScrollPane
         Label libLB=JavaFX.NewLabel("Libellé",lightBlue,1,20,250,10);
         TextField libField=JavaFX.NewTextField(18,300,250,35);
         libField.setText(portfolio.getLabel());
-
-
 
         Content.getChildren().addAll(refLB,refField,libLB,libField);
 
@@ -101,9 +92,7 @@ public class PortfolioModify extends ScrollPane
                     public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue)
                     {
                         if (!newValue.matches("\\d*"))
-                        {
-                            textField.setText(newValue.replaceAll("[^\\d]", ""));
-                        }
+                        {textField.setText(newValue.replaceAll("[^\\d]", ""));}
                     }});
                     weightsList[criteriaIndex]=textField;
                     break;
@@ -123,27 +112,9 @@ public class PortfolioModify extends ScrollPane
             criteriaIndex++;
         }
 
-        //-Resource-----------------------------------------------------------------------------------------------------------------------------
-        y+=50;
-        Content.getChildren().add(JavaFX.NewLabel("Ressources",lightBlue,1,20,10,y));
-        List<AssignedResource> resourcesList= ResToPortfolioQueries.getResourceByPortfolio(idPortfolio);
-        Pane resourcePanes=new Pane();
-        resourcePanes.setLayoutY((y+50)*scaley);
-        resourcePaneList= new ArrayList<>();
-
-        int resoureIndex=0;
-        for(AssignedResource resource:resourcesList)
-        {
-            ResourcePane rp=new ResourcePane(resourcePanes,resourcePaneList,resource);
-            resourcePaneList.add(rp);
-            resourcePanes.getChildren().add(rp);
-        }
-
-        Content.getChildren().add(resourcePanes);
-
         //-Confirm-And-Cancel----------------------------------------------------------------------------------------------------------------------
-        Button confirm=JavaFX.NewButton("Confirmer",lightGreen,18,350,75+y+resourcesList.size()*50);
-        Button cancel=JavaFX.NewButton("Annuler",red,18,465,75+y+resourcesList.size()*50);
+        Button confirm=JavaFX.NewButton("Confirmer",lightGreen,18,350,75+y/*+resourcesList.size()*50*/);
+        Button cancel=JavaFX.NewButton("Annuler",red,18,465,75+y/*+resourcesList.size()*50*/);
         Content.getChildren().addAll(confirm,cancel);
         confirm.addEventFilter(MouseEvent.MOUSE_PRESSED, mouseEvent->
         {
@@ -182,8 +153,13 @@ public class PortfolioModify extends ScrollPane
                         }
                         didReset=true;
                     }
-                    int weight=Integer.valueOf(weightsList[index].getText());
-                    PortfolioCriteriaQueries.addToDatabase(index,idPortfolio,weight, Utility.getDatetime(),"null");
+                    int weight=0;
+                    try
+                    {
+                        weight=Integer.valueOf(weightsList[index].getText());
+                        PortfolioCriteriaQueries.addToDatabase(index,idPortfolio,weight, Utility.getDatetime(),"null");
+                    }
+                    catch (Exception ignored){}
                 }
                 else
                 {
@@ -198,17 +174,9 @@ public class PortfolioModify extends ScrollPane
                 index++;
             }
 
-            ResToPortfolioQueries.resetTable(idPortfolio);
-            for(ResourcePane rp:resourcePaneList)
-            {
-                String date=new Timestamp(60*1000*(System.currentTimeMillis()/(1000*60))).toString();
-                ResToPortfolioQueries.addToDatabase(idPortfolio,rp.getIdResource(),date.substring(0,date.length()-5),rp.getQuantity());
-            }
-
             getChildren().clear();
             this.setStyle("-fx-background-color: #f3f3f3;");
             parent.resetSelection();
-            ResourcePane.count=0;
         });
 
         cancel.addEventFilter(MouseEvent.MOUSE_PRESSED, mouseEvent->
@@ -216,76 +184,8 @@ public class PortfolioModify extends ScrollPane
             getChildren().clear();
             this.setStyle("-fx-background-color: #f3f3f3;");
             parent.resetSelection();
-            ResourcePane.count=0;
         });
 
         this.setContent(Content);
-    }
-}
-
-class ResourcePane extends Pane
-{
-    static double scaley = Login.scaley;
-
-    public static int count=0;
-    public int index;
-
-    private int idResource;
-    private int quantity;
-    private TextField resourcesCountField;
-
-    private Paint lightOrange= javafx.scene.paint.Paint.valueOf("F77D50");
-
-    ResourcePane(Pane resourcePane,ArrayList<ResourcePane> resourceList,AssignedResource resource)
-    {
-        index=count;
-        count++;
-
-        this.idResource=resource.getIdResource();
-        String resourceName=resource.getLabel();
-        this.quantity=resource.getQuantity();
-
-        setLayoutY((index*50)*scaley);
-        getChildren().add(JavaFX.NewLabel(resourceName,18,50,0));
-        resourcesCountField=JavaFX.NewTextField(18,75,380,0);
-        resourcesCountField.setText(String.valueOf(quantity));
-        resourcesCountField.textProperty().addListener(new ChangeListener<String>()
-        {
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue)
-            {
-                if (!newValue.matches("\\d*"))
-                {
-                    resourcesCountField.setText(newValue.replaceAll("[^\\d]", ""));
-                }
-            }
-        });
-        Button delete=JavaFX.NewButton("Supprimer",lightOrange,15,460,3);
-
-        delete.addEventFilter(MouseEvent.MOUSE_PRESSED, mouseEvent->
-        {
-            resourcePane.getChildren().clear();
-            resourceList.remove(this);
-            int i=0;
-            for(ResourcePane rp:resourceList)
-            {
-                rp.index=i;
-                rp.setLayoutY(i*50);
-                resourcePane.getChildren().add(rp);
-                i++;
-            }
-            count--;
-        });
-        getChildren().addAll(resourcesCountField,delete);
-    }
-
-    public int getIdResource()
-    {
-        return idResource;
-    }
-
-    public int getQuantity()
-    {
-        return Integer.valueOf(resourcesCountField.getText());
     }
 }

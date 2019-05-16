@@ -28,7 +28,7 @@ public class ResourceInterface extends Pane
     private Paint lightGreen=Paint.valueOf("50be96");
     private Paint lightOrange=Paint.valueOf("F77D50");
 
-    private Button add,bar,assignToPortfolio,assignToProject,modify;
+    private Button add,bar,modify;
     private Button add2,bar2,modify2;
 
     private ComboBox idCatField;
@@ -45,14 +45,10 @@ public class ResourceInterface extends Pane
         Image modifyIcon= new Image("file:res/icon/resource/Modify.png");
 
         //-Resource-Table------------------------------------------------------------------------------------------------------------------------------------
-        bar=JavaFX.NewButton("",black,2, 1100, 85,600,10);
-        assignToPortfolio=JavaFX.NewButton("Affecter au portefeuille", portfolioIcon, ContentDisplay.LEFT, lightOrange, 16,1110 ,74 , 240, 32);
-        assignToProject=JavaFX.NewButton("Affecter au projet", projectIcon, ContentDisplay.LEFT, lightOrange, 16,1360 ,74 , 220, 32);
-        modify=JavaFX.NewButton("Modifier", modifyIcon, ContentDisplay.LEFT, lightBlue, 16,1590 ,74 , 125, 32);
+        bar=JavaFX.NewButton("",black,2, 1100, 85,100,10);
+        modify=JavaFX.NewButton("Modifier la ressource", modifyIcon, ContentDisplay.LEFT, lightBlue, 16,1110 ,74 , 225, 32);
 
         getChildren().add(bar);
-        getChildren().add(assignToPortfolio);
-        getChildren().add(assignToProject);
         getChildren().add(modify);
 
         setActionBar(false);
@@ -77,32 +73,6 @@ public class ResourceInterface extends Pane
                 }
             });
             return row;
-        });
-
-        assignToPortfolio.addEventFilter(MouseEvent.MOUSE_PRESSED, mouseEvent ->
-        {
-            if(!editing)
-            {
-                Object row=tvResource.getSelectionModel().getSelectedItems().get(0);
-                int resId = Integer.valueOf(row.toString().split(",")[0].substring(1));
-
-                AssignToPortfolio atp=new AssignToPortfolio(resId,assignToPortfolio.getLayoutX(),assignToPortfolio.getLayoutY(),this);
-                getChildren().add(atp);
-                editing=true;
-            }
-        });
-        assignToProject.addEventFilter(MouseEvent.MOUSE_PRESSED, mouseEvent ->
-        {
-            if(!editing)
-            {
-                Object row=tvResource.getSelectionModel().getSelectedItems().get(0);
-                int resId = Integer.valueOf(row.toString().split(",")[0].substring(1));
-
-                AssignToProject atp=new AssignToProject(resId,assignToProject.getLayoutX(),assignToProject.getLayoutY(),this);
-                getChildren().add(atp);
-                editing=true;
-            }
-
         });
 
         modify.addEventFilter(MouseEvent.MOUSE_PRESSED, mouseEvent ->
@@ -281,8 +251,6 @@ public class ResourceInterface extends Pane
 
     private void setActionBar(boolean visbility)
     {
-        assignToPortfolio.setVisible(visbility);
-        assignToProject.setVisible(visbility);
         modify.setVisible(visbility);
         bar.setVisible(visbility);
     }

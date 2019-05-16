@@ -30,14 +30,14 @@ public class ProjectInterface extends Pane
 	private Paint lightBlue=Paint.valueOf("11BAF8");
 	private Paint lightGreen=Paint.valueOf("50be96");
 
-	private Button bar,modify,evaluate;
+	private Button bar,modify;
 	private Button bar2,modify2;
 	private Button add,add2;
 
 	private TableView tvProject,tvType;
 	private ComboBox typeField ,porField;
 
-	@SuppressWarnings({ "unchecked","rawtypes" })
+	@SuppressWarnings({"rawtypes" })
 	public ProjectInterface(User user, double x, double y)
 	{
 		this.setLayoutX(x*scalex);
@@ -47,17 +47,14 @@ public class ProjectInterface extends Pane
 		Image modifyIcon= new Image("file:res/icon/portfolio/Modify.png");
 		Image evaluateIcon=new Image("file:res/icon/portfolio/Evaluate.png");
 
-		bar=JavaFX.NewButton("",black,2, 780, 85,550,10);
-		modify=JavaFX.NewButton("Modifier", modifyIcon, ContentDisplay.LEFT, lightBlue, 16,1110 ,74 , 130, 32);
-		evaluate=JavaFX.NewButton("Evaluer", evaluateIcon, ContentDisplay.LEFT, lightGreen, 16,1250 ,74 , 125, 32);
+		bar=JavaFX.NewButton("",black,2, 780, 85,400,10);
+		modify=JavaFX.NewButton("Modifier le projet", modifyIcon, ContentDisplay.LEFT, lightBlue, 16,1110 ,74 , 225, 32);
 
 
 		getChildren().add(bar);
 		getChildren().add(modify);
-		getChildren().add(evaluate);
 
 		modify.setVisible(false);
-		evaluate.setVisible(false);
 		bar.setVisible(false);
 
 		tvProject=JavaFX.NewTableView(ProjectQueries.getResultSet(), 100,75, 1000, 400);
@@ -79,18 +76,6 @@ public class ProjectInterface extends Pane
 			}
 			else JavaFX.privilegeAlert();
 
-		});
-
-		evaluate.addEventFilter(MouseEvent.MOUSE_PRESSED, mouseEvent ->
-		{
-			setActionBar(false);
-			setActionBar2(false);
-			setActive(false);
-			Object row=tvProject.getSelectionModel().getSelectedItems().get(0);
-			int idProject = Integer.valueOf(row.toString().split(",")[0].substring(1));
-			int idPortfolio = Integer.valueOf(row.toString().split(",")[2].substring(1));
-			ProjectEvaluate projectEvaluate =new ProjectEvaluate(this,idProject,idPortfolio,user.getId());
-			additionalOptions.getChildren().add(projectEvaluate);
 		});
 
 		tvProject.setRowFactory(tv->
@@ -290,7 +275,6 @@ public class ProjectInterface extends Pane
 
 	private void setActionBar(boolean visbility)
 	{
-		evaluate.setVisible(visbility);
 		modify.setVisible(visbility);
 		bar.setVisible(visbility);
 	}
